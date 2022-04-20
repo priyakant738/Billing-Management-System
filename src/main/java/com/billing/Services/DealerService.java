@@ -1,16 +1,14 @@
 package com.billing.Services;
 
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import org.springframework.stereotype.Service;
 import com.billing.Repository.DealerRepository;
 import com.billing.entities.Dealer;
 
 
-@Component
+
+@Service
 public class DealerService
 {
 	
@@ -55,21 +53,30 @@ public class DealerService
 	}
 	
 	
-	 //detele Dealer
+	 //delete Dealer
 	public void deleteDealer(Long did)
 	{
 		dealerRepository.deleteById(did);
 	}
 
 	
-	//update the Dealer
+	        //update the Dealer
 	
-	public void updateDealer(Dealer dealer, Long dealerid)
-	{
-		dealer.setDealer_id(dealerid);
-		
-		dealerRepository.save(dealer);
-	}
 	
+			public Dealer updateDealer(Dealer dealer, Long id)
+			{
+				
+				Dealer list= dealerRepository.getById(id);
+				list.setDealer_firstname(dealer.getDealer_firstname());
+				list.setDealer_lastname(dealer.getDealer_lastname());
+				list.setDealer_address(dealer.getDealer_address());
+				list.setPincode(dealer.getPincode());
+				list.setState_id(dealer.getState_id());
+				list.setCity_id(dealer.getCity_id());
+				
+				dealerRepository.save(list);
+				
+				return list;
+			}
 
 }

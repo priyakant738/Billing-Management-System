@@ -1,6 +1,6 @@
 package com.billing.entities;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,13 +13,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "City")
-public class City {
+public class City extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long city_id;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="state_id")
 	private State state_id;
 	

@@ -4,12 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.billing.entities.Agency;
+import com.billing.entities.City;
 
 
-public interface AgencyRepository extends JpaRepository<Agency, Long>{
-	
-	@Query("select a from Agency a where a.agency_id = :id")
-	public Agency find(@Param("id") Long id);
+	public interface CityRepository extends JpaRepository<City, Long>{
+		
+		@Query("select c from City c where c.city_id = :id")
+		public City find(@Param("id") Long id);
 
 }

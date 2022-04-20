@@ -14,21 +14,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.billing.Services.StateService;
-import com.billing.entities.State;
+import com.billing.Services.CityService;
+import com.billing.entities.City;
 
 @Controller
-public class StateController {
+public class CityController {
 	
 	@Autowired
-	private StateService stateService;
+	private CityService cityService;
 	
-	//get all state handler
 	
-	@GetMapping("/state")
-	public ResponseEntity<List<State>> getState()
+	//get all city handler
+	
+	@GetMapping("/city")
+	public ResponseEntity<List<City>> getCity()
 	{
-		List<State>list = stateService.getAllState();
+		List<City>list = cityService.getAllCity();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -37,30 +38,31 @@ public class StateController {
 		return ResponseEntity.of(Optional.of(list));
 	}
 	
-	//get single state handler
 	
-	@GetMapping("/state/{id}")
-	public ResponseEntity<State> getState(@PathVariable("id")Long id)
+	//get single city handler
+	@GetMapping("/city/{id}")
+	public ResponseEntity<City> getCity(@PathVariable("id")Long id)
 	{
-		State state = stateService.getStateByid(id);
-		if(state==null)
+		City city = cityService.getCityByid(id);
+		if(city==null)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			
 		}
-		return ResponseEntity.of(Optional.of(state));
+		return ResponseEntity.of(Optional.of(city));
 	}
 	
-	//new state handler
+	//new city handler
 	
-	@PostMapping("/state")
-	public ResponseEntity<State> addState(@RequestBody State state)
+	@PostMapping("/city")
+	public ResponseEntity<City> addCity(@RequestBody City city)
 	{
-		State s = null;
+		City c = null;
 		
 		try
 		{
-			s = this.stateService.addState(state);
-			System.out.println(state);
+			c = this.cityService.addCity(city);
+			System.out.println(city);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 			
 		}
@@ -73,14 +75,14 @@ public class StateController {
 	}
 	
 	
-	//delete State handler
+	//delete city handler
 	
-	@DeleteMapping("/state/{id}")
-	public ResponseEntity<Object> deleteState(@PathVariable("id")Long id)
+	@DeleteMapping("/city/{id}")
+	public ResponseEntity<Object> deleteCity(@PathVariable("id")Long id)
 	{
 		try
 	  {
-		this.stateService.deleteState(id);
+		this.cityService.deleteCity(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	   }
 		catch(Exception e)
@@ -90,23 +92,24 @@ public class StateController {
 		}
 	}
 	
-	//update state handler
-	@PutMapping("/state/{id}")
-	public ResponseEntity<State> updateState(@RequestBody State state,@PathVariable("id") Long id)
+	//update city handler
+	@PutMapping("/city/{id}")
+	public ResponseEntity<City> updateCity(@RequestBody City city,@PathVariable("city_id") Long id)
 	{
-	   
-	   
-	   try
-		  {
-		 State list = this.stateService.updateState(state, id);
-			return ResponseEntity.status(HttpStatus.OK).body(list);
-		   }
-			catch(Exception e)
-			{
-			  e.printStackTrace();
-			  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-			}
-	   
+	  try {
+		  City List=this.cityService.updateCity(city, id);
+		  return ResponseEntity.status(HttpStatus.OK).body(List);
+	  }
+	  catch(Exception e){
+		  
+		  e.printStackTrace();
+		  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		  
+	  }
+	 
+	  
 	}
+
+	
 
 }

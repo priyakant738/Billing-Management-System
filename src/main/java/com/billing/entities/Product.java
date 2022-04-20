@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Product")
-public class Product {
+public class Product extends BaseClass<String>{
 	
 	
 	@Id

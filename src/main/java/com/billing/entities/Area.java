@@ -4,13 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Area")
-public class Area {
+public class Area extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long area_id;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="city_id")
 	private City city_id;
 	

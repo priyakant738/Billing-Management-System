@@ -7,7 +7,7 @@ import com.billing.entities.State;
 
 public interface StateRepository extends JpaRepository<State, Long>{
 	
-	@Query("select d from Dealer d where d.dealer_id = :id")
+	@Query("select s from State s where s.state_id = :id")
 	public State find(@Param("id") Long id);
 
 }

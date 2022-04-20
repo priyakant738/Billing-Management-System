@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Category")
-public class Category {
+public class Category extends BaseClass<String> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long category_id;

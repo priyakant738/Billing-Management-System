@@ -4,12 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.billing.entities.Agency;
+import com.billing.entities.Area;
 
-
-public interface AgencyRepository extends JpaRepository<Agency, Long>{
+public interface AreaRepository extends JpaRepository<Area, Long>{
 	
-	@Query("select a from Agency a where a.agency_id = :id")
-	public Agency find(@Param("id") Long id);
+	@Query("select a from Area a where a.area_id = :id")
+	public Area find(@Param("id") Long id);
 
 }

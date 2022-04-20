@@ -3,9 +3,12 @@ package com.billing.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.billing.Repository.StateRepository;
 import com.billing.entities.State;
 
+@Service
 public class StateService {
 	
 
@@ -56,13 +59,20 @@ public class StateService {
 			stateRepository.deleteById(sid);
 		}
 		
+		
 		//update the State
 		
-		public void updateState(State state, Long stateid)
+		public State updateState(State state, Long id)
 		{
-			state.setState_id(stateid);
 			
-			stateRepository.save(state);
+			State list= stateRepository.getById(id);
+			
+			list.setState_code(state.getState_code());
+			list.setState_name(state.getState_name());
+			
+			stateRepository.save(list);
+			
+			return list;
 		}
 	
 	
