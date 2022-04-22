@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.billing.Services.ProductService;
 import com.billing.entities.Product;
 
 @Controller
@@ -96,7 +97,7 @@ public class ProductController {
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable("city_id") Long id)
 	{
 	  try {
-		  Product List=this.ProductService.updateProduct(product, id);
+		  Product List=this.productService.updateProduct(product, id);
 		  return ResponseEntity.status(HttpStatus.OK).body(List);
 	  }
 	  catch(Exception e){

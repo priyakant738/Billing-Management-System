@@ -53,7 +53,7 @@ public class StateService {
 		}
 		
 
-		 //detele State
+		 //delete State
 		public void deleteState(Long sid)
 		{
 			stateRepository.deleteById(sid);

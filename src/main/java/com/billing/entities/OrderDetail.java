@@ -3,20 +3,28 @@ package com.billing.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Order_Detail")
-public class Order_Detail extends BaseClass<String>{
+@Table(name = "OrderDetail")
+public class OrderDetail extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long order_detail_id;
+	private Long orderdetail_id;
 	
-	@OneToMany(targetEntity = Order_Detail.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(targetEntity = OrderDetail.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private List<Product> product_id= new ArrayList<>();
-	
 	
 	@Column(name ="product_qty")
 	private Long product_qty;
@@ -33,12 +41,12 @@ public class Order_Detail extends BaseClass<String>{
 	@Column(name ="product_netamount")
 	private Long product_netamount;
 
-	public long getOrder_detail_id() {
-		return order_detail_id;
+	public Long getOrderdetail_id() {
+		return orderdetail_id;
 	}
 
-	public void setOrder_detail_id(long order_detail_id) {
-		this.order_detail_id = order_detail_id;
+	public void setOrderdetail_id(Long orderdetail_id) {
+		this.orderdetail_id = orderdetail_id;
 	}
 
 	public List<Product> getProduct_id() {
@@ -88,6 +96,9 @@ public class Order_Detail extends BaseClass<String>{
 	public void setProduct_netamount(Long product_netamount) {
 		this.product_netamount = product_netamount;
 	}
+	
+	
+	
 	
 	
 	

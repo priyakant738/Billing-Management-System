@@ -14,7 +14,7 @@ public class AreaService {
 	@Autowired
 	private AreaRepository areaRepository;
 	
-	public List<Area> getAllState()
+	public List<Area> getAllArea()
 	{
 		List<Area> list=(List<Area>)this.areaRepository.findAll();
 		return list;

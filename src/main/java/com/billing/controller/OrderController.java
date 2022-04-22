@@ -14,23 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.billing.Repository.AreaRepository;
-import com.billing.entities.Agency_Dealer;
-import com.billing.entities.Area;
-import com.billing.entities.Product;
+import com.billing.Services.OrderService;
+import com.billing.entities.City;
+import com.billing.entities.Order;
 
 @Controller
-public class Agency_DealerController {
-	
+public class OrderController {
 	@Autowired
-	private Agency_DealerRepository agency_DealerRepository;
+	private OrderService orderService;
 	
-	//get all agency_Dealer handler
+	//get all Order handler
 	
-		@GetMapping("/agency_Dealer")
-		public ResponseEntity<List<agency_Dealer>> getProduct()
+		@GetMapping("/order")
+		public ResponseEntity<List<Order>> getOrder()
 		{
-			List<Agency_Dealer>list = agency_DealerService.getAllProduct();
+			List<Order>list = orderService.getAllOrder();
 			if(list.size()<= 0)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -39,31 +37,31 @@ public class Agency_DealerController {
 			return ResponseEntity.of(Optional.of(list));
 		}
 		
+		//get single order handler
 		
-		//get single agency_Dealer handler
-		@GetMapping("/agency_Dealer/{id}")
-		public ResponseEntity<Agency_Dealer> getProduct(@PathVariable("id")Long id)
+		@GetMapping("/order/{id}")
+		public ResponseEntity<Order> getOrder(@PathVariable("id")Long id)
 		{
-			Agency_Dealer agency_Dealer = agency_DealerService.getAgency_DealerByid(id);
-			if(agency_Dealer==null)
+			Order order = orderService.getOrderByid(id);
+			if(order==null)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 				
 			}
-			return ResponseEntity.of(Optional.of(agency_Dealer));
+			return ResponseEntity.of(Optional.of(order));
 		}
 		
-		//new Agency_Dealer handler
+		//new order handler
 		
-		@PostMapping("/agency_Dealer")
-		public ResponseEntity<Agency_Dealer> addAgency_Dealer(@RequestBody Agency_Dealer agency_Dealer)
+		@PostMapping("/order/addorder")
+		public ResponseEntity<Order> addOrder(@RequestBody Order order)
 		{
-			Agency_Dealer ad = null;
+			Order o = null;
 			
 			try
 			{
-				ad = this.agency_DealerService.addCity(agency_Dealer);
-				System.out.println(agency_Dealer);
+				o = this.orderService.addOrder(order);
+				System.out.println(order);
 				return ResponseEntity.status(HttpStatus.CREATED).build();
 				
 			}
@@ -75,15 +73,14 @@ public class Agency_DealerController {
 			
 		}
 		
+		//delete Order handler
 		
-		//delete Agency_Dealer handler
-		
-		@DeleteMapping("/agency_Dealer/{id}")
-		public ResponseEntity<Object> deleteAgency_Dealer(@PathVariable("id")Long id)
+		@DeleteMapping("/order/{id}")
+		public ResponseEntity<Order> deleteOrder(@PathVariable("id")Long id)
 		{
 			try
 		  {
-			this.agency_DealerService.deleteProduct(id);
+			this.orderService.deleteOrder(id);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		   }
 			catch(Exception e)
@@ -93,7 +90,22 @@ public class Agency_DealerController {
 			}
 		}
 		
-	
-	
+		//update order handler
+		@PutMapping("/order/{id}")
+		public ResponseEntity<Order> updateOrder(@RequestBody Order order,@PathVariable("city_id") Long id)
+		{
+		  try {
+			  Order List=this.orderService.updateOrder(order, id);
+			  return ResponseEntity.status(HttpStatus.OK).body(List);
+		  }
+		  catch(Exception e){
+			  
+			  e.printStackTrace();
+			  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			  
+		  }
+		 
+		  
+		}
 
 }

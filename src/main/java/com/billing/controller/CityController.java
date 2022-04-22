@@ -54,7 +54,7 @@ public class CityController {
 	
 	//new city handler
 	
-	@PostMapping("/city")
+	@PostMapping("/city/addcity")
 	public ResponseEntity<City> addCity(@RequestBody City city)
 	{
 		City c = null;

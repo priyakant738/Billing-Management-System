@@ -14,42 +14,13 @@ public class Product extends BaseClass<String>{
 	private Long product_id;
 	
 	
-	@OneToOne(targetEntity = Product.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name = "agency_id")
-	private Agency agency_id;
-	
-	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="category_id")
 	private Category category_id;
 	
-
-//	  @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="product")
-//	  private List<Category> category_id = new ArrayList<>();
-
-//	 @OneToMany( mappedBy="product", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-//	 private List<Agency> agency = new ArrayList<>();
-	 
-//	  @OneToMany(targetEntity = Agency.class)
-//	    @JoinColumn(name = "AP_fk",referencedColumnName="product_id")
-//	    private List<Agency> agency;
-	  
-//	  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	    @JoinColumn(name = "agency_id")
-//	    private List<Agency> agency;
-	  
-	  
-//	  @OneToMany
-//	  @JoinColumn(name="Agency_id")
-//	  private Set<Agency> agency;
-//	  
-//	  @OneToMany(cascade=CascadeType.ALL)
-//	  @JoinColumn(name="fk_product_id", referencedColumnName="product_id")
-//	  private Agency agency;
-	  
-//	  @OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
-//	  @JoinColumn(name="product_id")
-//	  private List<Agency>agency= new ArrayList<>();
+	@OneToOne(targetEntity = Product.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name = "agency_id")
+	private Agency agency_id;
 	 
 	@Column(name ="Product_Name")
 	private String product_name;

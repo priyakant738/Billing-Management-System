@@ -37,20 +37,20 @@ public class AgencyController
 	//get single agency handler
 	
 			@GetMapping("/agency/{id}")
-			public ResponseEntity<Agency> getArea(@PathVariable("id")Long id)
+			public ResponseEntity<Agency> getAgency(@PathVariable("id")Long id)
 			{
-				Agency area = agencyService.getAgencyByid(id);
-				if(area==null)
+				Agency agency = agencyService.getAgencyByid(id);
+				if(agency==null)
 				{
 					return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 				}
-				return ResponseEntity.of(Optional.of(area));
+				return ResponseEntity.of(Optional.of(agency));
 			}
 	
 	    
 			//new agency handler
 			
-			@PostMapping("/agency")
+			@PostMapping("/agency/addagency")
 			public ResponseEntity<Agency> addAgency(@RequestBody Agency agency)
 			{
 				Agency aa = null;

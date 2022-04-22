@@ -6,25 +6,37 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Dealer_Retailer")
-public class Dealer_Retailer extends BaseClass<String>{
+public class DealerRetailer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long dealer_retailer_id;
 	
-	@OneToMany(targetEntity = Dealer_Retailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(targetEntity = DealerRetailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "dealer_id")
 	private List<Dealer> dealer_id = new ArrayList<>();
 	
-	@OneToMany(targetEntity = Dealer_Retailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(targetEntity = DealerRetailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "retailer_id")
 	private List<Retailer> retailer_id = new ArrayList<>();
 	
-	@OneToMany(targetEntity = Dealer_Retailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(targetEntity = DealerRetailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private List<Category> category_id = new ArrayList<>();
 	
+	@OneToMany(targetEntity = DealerRetailer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+	private List<Product>product_id = new ArrayList<>();
 	
+	
+	public List<Product> getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(List<Product> product_id) {
+		this.product_id = product_id;
+	}
+
 	@Column(name ="product_grossamount")
 	private Long product_grossamount;
 	
@@ -100,12 +112,6 @@ public class Dealer_Retailer extends BaseClass<String>{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="dealer_retailer")
-//	private List<Dealer> dealer_id = new ArrayList<>();
-//	
-//	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="dealer_retailer")
-//	private List<Retailer> retailer_id = new ArrayList<>();
 	
 	
 	

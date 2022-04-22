@@ -27,9 +27,6 @@ public class Agency  extends BaseClass<String>{
 	@Column(name ="agency_pincode")
 	private String agency_pincode;
 	
-//	 @OneToMany(targetEntity = Product.class)
-//	    @JoinColumn(name = "agency_id")
-//	    private List<Product> product;
 	
 	
 	@OneToMany(targetEntity = Agency.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -102,9 +99,6 @@ public class Agency  extends BaseClass<String>{
 	public void setGstin_number(String gstin_number) {
 		this.gstin_number = gstin_number;
 	}
-	
-	
-	
 	
 	
 	

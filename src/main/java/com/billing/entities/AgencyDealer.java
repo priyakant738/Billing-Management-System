@@ -1,10 +1,7 @@
 package com.billing.entities;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,26 +14,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Agency_Dealers")
-public class Agency_Dealer extends BaseClass<String>{
+@Table(name = "AgencyDealer")
+public class AgencyDealer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long agency_dealer_id;
+	private Long agencydealer_id;
 	  
-   @OneToMany(targetEntity = Agency_Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
    @JoinColumn(name = "agency_id")
    private List<Agency> agency_id = new ArrayList<>();
    
-   @OneToMany(targetEntity = Agency_Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
    @JoinColumn(name = "dealer_id")
    private List<Dealer> dealer_id = new ArrayList<>();
    
-   @OneToMany(targetEntity = Agency_Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
    @JoinColumn(name = "cagegory_id")
    private List<Category> category_id = new ArrayList<>();
  
-   @OneToMany(targetEntity = Agency_Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
    @JoinColumn(name = "product_id")
    private List<Product> product_id = new ArrayList<>();
 	
@@ -54,11 +51,11 @@ public class Agency_Dealer extends BaseClass<String>{
 	private String status;
 
 	public Long getAgency_dealer_id() {
-		return agency_dealer_id;
+		return agencydealer_id;
 	}
 
 	public void setAgency_dealer_id(Long agency_dealer_id) {
-		this.agency_dealer_id = agency_dealer_id;
+		this.agencydealer_id = agency_dealer_id;
 	}
 
 	public List<Agency> getAgency_id() {
@@ -125,6 +122,7 @@ public class Agency_Dealer extends BaseClass<String>{
 		this.status = status;
 	}
 
+	
 	
 	
 	

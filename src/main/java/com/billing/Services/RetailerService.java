@@ -50,7 +50,7 @@ public class RetailerService {
     
 	  }
 	
-	        //detele Retailer
+	        //delete Retailer
 	   
 			public void deleteRetailer(Long rid)
 			{

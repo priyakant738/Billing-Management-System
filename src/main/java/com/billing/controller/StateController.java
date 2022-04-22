@@ -52,7 +52,7 @@ public class StateController {
 	
 	//new state handler
 	
-	@PostMapping("/state")
+	@PostMapping("/state/addstate")
 	public ResponseEntity<State> addState(@RequestBody State state)
 	{
 		State s = null;

@@ -28,7 +28,7 @@ public class AreaController {
 	@GetMapping("/area")
 	public ResponseEntity<List<Area>> getArea()
 	{
-		List<Area>list = areaService.getAllState();
+		List<Area>list = areaService.getAllArea();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -53,7 +53,7 @@ public class AreaController {
 		
 		//new Area handler
 		
-		@PostMapping("/area")
+		@PostMapping("/area/addarea")
 		public ResponseEntity<Area> addArea(@RequestBody Area area)
 		{
 			Area a = null;
@@ -76,7 +76,7 @@ public class AreaController {
 		//delete Area handler
 		
 		@DeleteMapping("/area/{id}")
-		public ResponseEntity<Object> deleteState(@PathVariable("id")Long id)
+		public ResponseEntity<Object> deleteArea(@PathVariable("id")Long id)
 		{
 			try
 		  {
