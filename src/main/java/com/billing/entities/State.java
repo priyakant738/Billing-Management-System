@@ -1,10 +1,14 @@
 package com.billing.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,17 @@ public class State extends BaseClass<String>{
 	
 	@Column(name ="state_name")
 	private String state_name;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<City> city;
+
+	public Set<City> getCity() {
+		return city;
+	}
+
+	public void setCity(Set<City> city) {
+		this.city = city;
+	}
 
 	public Long getState_id() {
 		return state_id;
@@ -44,7 +59,7 @@ public class State extends BaseClass<String>{
 	public void setState_name(String state_name) {
 		this.state_name = state_name;
 	}
-	
+
 	
 	
 

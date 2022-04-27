@@ -23,7 +23,7 @@ public class DealerRetailerController {
 	private DealerRetailerService dealerRetailerSevice;
 	
 
-	@GetMapping("/Dealerretailer")
+	@GetMapping("/dealerretailer")
 	public ResponseEntity<List<DealerRetailer>> getDealerRetailer()
 	{
 		List<DealerRetailer>list = dealerRetailerSevice.getAllDealerRetailer();
@@ -37,7 +37,7 @@ public class DealerRetailerController {
 	
 	//get single DealerRetailer handler
 	
-	@GetMapping("/Dealerretailer/{id}")
+	@GetMapping("/dealerretailer/{id}")
 	public ResponseEntity<DealerRetailer> getDealerRetailer(@PathVariable("id")Long id)
 	{
 		DealerRetailer dealerRetailer = dealerRetailerSevice.getDealerRetailerByid(id);
@@ -50,7 +50,7 @@ public class DealerRetailerController {
 	
 	//new DealerRetailer handler
 	
-	@PostMapping("/Dealerretailer/addDealerretailer")
+	@PostMapping("/dealerretailer/adddealerretailer")
 	public ResponseEntity<DealerRetailer> addDealerRetailer(@RequestBody DealerRetailer dealerRetailer)
 	{
 		DealerRetailer d = null;
@@ -73,7 +73,7 @@ public class DealerRetailerController {
 
 	//delete DealerRetailer handler
 	
-	@DeleteMapping("/Dealerretailer/{id}")
+	@DeleteMapping("/dealerretailer/{id}")
 	public ResponseEntity<DealerRetailer> deleteDealerRetailer(@PathVariable("id")Long id)
 	{
 		try
@@ -90,7 +90,7 @@ public class DealerRetailerController {
 	}
 	
 	//update DealerRetailer handler
-	@PutMapping("/agency/{id}")
+	@PutMapping("/dealerretailer/{id}")
 	public DealerRetailer updateDealerRetailer(@RequestBody DealerRetailer dealerRetailer,@PathVariable("id") Long id)
 	{
 		this.dealerRetailerSevice.updateDealerRetailer(dealerRetailer, id);

@@ -60,7 +60,7 @@ public class DealerRetailerService {
 				return list;
 			}
 			
-			//update the State
+			//update the DealerRetailer
 			
 			public DealerRetailer updateDealerRetailer(DealerRetailer dealerRetailer, Long id)
 			{
@@ -71,10 +71,10 @@ public class DealerRetailerService {
 				list.setRetailer_id(dealerRetailer.getRetailer_id());
 				list.setCategory_id(dealerRetailer.getCategory_id());
 				list.setProduct_id(dealerRetailer.getProduct_id());
-				list.setProduct_grossamount(dealerRetailer.getProduct_grossamount());
-				list.setProduct_netamount(dealerRetailer.getProduct_netamount());
-				list.setProduct_discount(dealerRetailer.getProduct_discount());
-				list.setStatus(dealerRetailer.getStatus());
+//				list.setProduct_grossamount(dealerRetailer.getProduct_grossamount());
+//				list.setProduct_netamount(dealerRetailer.getProduct_netamount());
+//				list.setProduct_discount(dealerRetailer.getProduct_discount());
+//				list.setStatus(dealerRetailer.getStatus());
 				
 				dealerRetailerRepository.save(list);
 				

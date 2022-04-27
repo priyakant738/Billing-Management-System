@@ -15,6 +15,18 @@ public class StateService {
 	@Autowired
 	private StateRepository stateRepository;
 
+	
+	//Adding the State
+	
+	public State addState(State s)
+	{
+		State result=stateRepository.save(s);
+		return result;
+				
+	}
+			
+
+	
 	public List<State> getAllState()
 	{
 		List<State> list=(List<State>)this.stateRepository.findAll();
@@ -43,16 +55,7 @@ public class StateService {
 		}
 		
 		
-		//Adding the State
 		
-		public State addState(State s)
-		{
-			State result=stateRepository.save(s);
-			return result;
-			
-		}
-		
-
 		 //delete State
 		public void deleteState(Long sid)
 		{

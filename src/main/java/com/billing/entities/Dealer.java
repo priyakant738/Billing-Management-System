@@ -26,13 +26,13 @@ public class Dealer extends BaseClass<String>{
 	@Column(name ="PinCode")
 	private Long pincode;
 	
-	@OneToMany(targetEntity = Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "city_id")
-	private List<City> city_id = new ArrayList<>();
+	private City city_id;
 
-	@OneToMany(targetEntity = Dealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "state_id")
-	private List<State> state_id = new ArrayList<>();
+	private State state_id;
 
 	public Long getDealer_id() {
 		return dealer_id;
@@ -74,24 +74,22 @@ public class Dealer extends BaseClass<String>{
 		this.pincode = pincode;
 	}
 
-	public List<City> getCity_id() {
+	public City getCity_id() {
 		return city_id;
 	}
 
-	public void setCity_id(List<City> city_id) {
+	public void setCity_id(City city_id) {
 		this.city_id = city_id;
 	}
 
-	public List<State> getState_id() {
+	public State getState_id() {
 		return state_id;
 	}
 
-	public void setState_id(List<State> state_id) {
+	public void setState_id(State state_id) {
 		this.state_id = state_id;
 	}
-	
-	
-	
+
 	
 	
 }

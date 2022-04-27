@@ -10,7 +10,11 @@ public class Area extends BaseClass<String>{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long area_id;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+//	@OneToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="city_id")
+//	private City city_id;
+	
+	@ManyToOne
 	@JoinColumn(name="city_id")
 	private City city_id;
 	
@@ -24,17 +28,19 @@ public class Area extends BaseClass<String>{
 		return area_id;
 	}
 
-	public void setArea_id(Long area_id) {
-		this.area_id = area_id;
-	}
+  
 
 	public City getCity_id() {
 		return city_id;
 	}
 
+
+
 	public void setCity_id(City city_id) {
 		this.city_id = city_id;
 	}
+
+
 
 	public Long getArea_code() {
 		return area_code;
@@ -51,6 +57,12 @@ public class Area extends BaseClass<String>{
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
 	}
+
+	public void setArea_id(Long area_id) {
+		this.area_id = area_id;
+	}
+
+	
 	
 	
 	

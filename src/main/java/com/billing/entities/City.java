@@ -1,6 +1,9 @@
 package com.billing.entities;
 
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +24,7 @@ public class City extends BaseClass<String>{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long city_id;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="state_id")
 	private State state_id;
 	
@@ -28,6 +33,9 @@ public class City extends BaseClass<String>{
 	
 	@Column(name ="city_name")
 	private String city_name;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Area> area;
 
 	public Long getCity_id() {
 		return city_id;
@@ -60,6 +68,15 @@ public class City extends BaseClass<String>{
 	public void setCity_name(String city_name) {
 		this.city_name = city_name;
 	}
+
+	public Set<Area> getArea() {
+		return area;
+	}
+
+	public void setArea(Set<Area> area) {
+		this.area = area;
+	}
+
 	
 	
 	

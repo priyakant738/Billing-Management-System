@@ -1,6 +1,7 @@
 package com.billing.entities;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -29,13 +30,21 @@ public class Agency  extends BaseClass<String>{
 	
 	
 	
-	@OneToMany(targetEntity = Agency.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "state_id")
-	private List<State> state_id = new ArrayList<>();
+	private State state_id;
 	
-	@OneToMany(targetEntity = Agency.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "city_id")
-	private List<City> city_id = new ArrayList<>();
+	private City city_id;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private Set<Category> category_id;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private Set<Product> product;
+	
+	
 	
 	private String pancard;
 	private String gstin_number;
@@ -75,17 +84,29 @@ public class Agency  extends BaseClass<String>{
 	public void setAgency_pincode(String agency_pincode) {
 		this.agency_pincode = agency_pincode;
 	}
-	public List<State> getState_id() {
+	public State getState_id() {
 		return state_id;
 	}
-	public void setState_id(List<State> state_id) {
+	public void setState_id(State state_id) {
 		this.state_id = state_id;
 	}
-	public List<City> getCity_id() {
+	public City getCity_id() {
 		return city_id;
 	}
-	public void setCity_id(List<City> city_id) {
+	public void setCity_id(City city_id) {
 		this.city_id = city_id;
+	}
+	public Set<Category> getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(Set<Category> category_id) {
+		this.category_id = category_id;
+	}
+	public Set<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(Set<Product> product) {
+		this.product = product;
 	}
 	public String getPancard() {
 		return pancard;
@@ -99,6 +120,8 @@ public class Agency  extends BaseClass<String>{
 	public void setGstin_number(String gstin_number) {
 		this.gstin_number = gstin_number;
 	}
+	
+	
 	
 	
 	

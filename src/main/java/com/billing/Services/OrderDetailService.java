@@ -14,7 +14,9 @@ public class OrderDetailService {
 	@Autowired
 	private OrderDetailRepository orderDetailRepository;
 	
-	public List<OrderDetail> getAllDealerRetailer()
+	//Get All OrderDetails handler
+
+	public List<OrderDetail> getAllOrderDetail()
 	{
 		List<OrderDetail>list=orderDetailRepository.findAll();
 		return list;
@@ -50,7 +52,7 @@ public class OrderDetailService {
 	}
 	
 	//delete OrderDetail
-	public OrderDetail deleteState(Long oid)
+	public OrderDetail deleteOrderDetail(Long oid)
 	{
 		OrderDetail  list= orderDetailRepository.getById(oid);
 		orderDetailRepository.deleteById(oid);

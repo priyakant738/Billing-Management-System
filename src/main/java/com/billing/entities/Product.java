@@ -14,11 +14,11 @@ public class Product extends BaseClass<String>{
 	private Long product_id;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category_id;
 	
-	@OneToOne(targetEntity = Product.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "agency_id")
 	private Agency agency_id;
 	 
@@ -36,6 +36,15 @@ public class Product extends BaseClass<String>{
 	
 	@Column(name ="Product_Status")
 	private String product_status;
+	
+	@ManyToOne
+	private AgencyDealer AgencyDealer;
+	
+	@ManyToOne
+	private DealerRetailer DealerRetailer;
+	
+	@ManyToOne
+	private OrderDetail OrderDeatil;
 
 	public Long getProduct_id() {
 		return product_id;
@@ -45,20 +54,20 @@ public class Product extends BaseClass<String>{
 		this.product_id = product_id;
 	}
 
-	public Agency getAgency_id() {
-		return agency_id;
-	}
-
-	public void setAgency_id(Agency agency_id) {
-		this.agency_id = agency_id;
-	}
-
 	public Category getCategory_id() {
 		return category_id;
 	}
 
 	public void setCategory_id(Category category_id) {
 		this.category_id = category_id;
+	}
+
+	public Agency getAgency_id() {
+		return agency_id;
+	}
+
+	public void setAgency_id(Agency agency_id) {
+		this.agency_id = agency_id;
 	}
 
 	public String getProduct_name() {
@@ -101,10 +110,30 @@ public class Product extends BaseClass<String>{
 		this.product_status = product_status;
 	}
 
-    
-	
-	
-	
-	
+	public AgencyDealer getAgencyDealer() {
+		return AgencyDealer;
+	}
 
+	public void setAgencyDealer(AgencyDealer agencyDealer) {
+		AgencyDealer = agencyDealer;
+	}
+
+	public DealerRetailer getDealerRetailer() {
+		return DealerRetailer;
+	}
+
+	public void setDealerRetailer(DealerRetailer dealerRetailer) {
+		DealerRetailer = dealerRetailer;
+	}
+
+	public OrderDetail getOrderDeatil() {
+		return OrderDeatil;
+	}
+
+	public void setOrderDeatil(OrderDetail orderDeatil) {
+		OrderDeatil = orderDeatil;
+	}
+
+	
+	
 }

@@ -2,6 +2,7 @@ package com.billing.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,9 +23,9 @@ public class OrderDetail extends BaseClass<String>{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long orderdetail_id;
 	
-	@OneToMany(targetEntity = OrderDetail.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name = "product_id")
-	private List<Product> product_id= new ArrayList<>();
+	private Set<Product> product_id;
 	
 	@Column(name ="product_qty")
 	private Long product_qty;
@@ -49,11 +50,11 @@ public class OrderDetail extends BaseClass<String>{
 		this.orderdetail_id = orderdetail_id;
 	}
 
-	public List<Product> getProduct_id() {
+	public Set<Product> getProduct_id() {
 		return product_id;
 	}
 
-	public void setProduct_id(List<Product> product_id) {
+	public void setProduct_id(Set<Product> product_id) {
 		this.product_id = product_id;
 	}
 
@@ -96,7 +97,9 @@ public class OrderDetail extends BaseClass<String>{
 	public void setProduct_netamount(Long product_netamount) {
 		this.product_netamount = product_netamount;
 	}
+
 	
+
 	
 	
 	

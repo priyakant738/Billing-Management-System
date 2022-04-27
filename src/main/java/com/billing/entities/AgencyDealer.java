@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,19 +22,19 @@ public class AgencyDealer extends BaseClass<String>{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long agencydealer_id;
 	  
-   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToOne
    @JoinColumn(name = "agency_id")
-   private List<Agency> agency_id = new ArrayList<>();
+   private Agency agency_id;
    
-   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToOne
    @JoinColumn(name = "dealer_id")
-   private List<Dealer> dealer_id = new ArrayList<>();
+   private Dealer dealer_id;
    
-   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(cascade=CascadeType.ALL,targetEntity=AgencyDealer.class)
    @JoinColumn(name = "cagegory_id")
-   private List<Category> category_id = new ArrayList<>();
+   private List<Category> category_id;
  
-   @OneToMany(targetEntity = AgencyDealer.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+   @OneToMany(cascade=CascadeType.ALL,targetEntity=AgencyDealer.class)
    @JoinColumn(name = "product_id")
    private List<Product> product_id = new ArrayList<>();
 	
@@ -58,21 +59,7 @@ public class AgencyDealer extends BaseClass<String>{
 		this.agencydealer_id = agency_dealer_id;
 	}
 
-	public List<Agency> getAgency_id() {
-		return agency_id;
-	}
-
-	public void setAgency_id(List<Agency> agency_id) {
-		this.agency_id = agency_id;
-	}
-
-	public List<Dealer> getDealer_id() {
-		return dealer_id;
-	}
-
-	public void setDealer_id(List<Dealer> dealer_id) {
-		this.dealer_id = dealer_id;
-	}
+	
 
 	public List<Category> getCategory_id() {
 		return category_id;

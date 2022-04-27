@@ -107,6 +107,8 @@ public class Retailer extends BaseClass<String>{
 	public void setCity_id(City city_id) {
 		this.city_id = city_id;
 	}
+
+	
 	
 	
 	

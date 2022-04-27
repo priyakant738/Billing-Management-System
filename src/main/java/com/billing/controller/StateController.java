@@ -76,7 +76,7 @@ public class StateController {
 	//delete State handler
 	
 	@DeleteMapping("/state/{id}")
-	public ResponseEntity<Object> deleteState(@PathVariable("id")Long id)
+	public ResponseEntity<State> deleteState(@PathVariable("id")Long id)
 	{
 		try
 	  {

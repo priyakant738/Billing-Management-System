@@ -1,6 +1,7 @@
 package com.billing.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,15 +56,15 @@ public class CityController {
 	//new city handler
 	
 	@PostMapping("/city/addcity")
-	public ResponseEntity<City> addCity(@RequestBody City city)
+	public ResponseEntity<City> addCity(@RequestBody Map<String,Object> mp)
 	{
 		City c = null;
 		
 		try
 		{
-			c = this.cityService.addCity(city);
-			System.out.println(city);
-			return ResponseEntity.status(HttpStatus.CREATED).build();
+			c = this.cityService.addCity(mp);
+			System.out.println(mp);
+			return ResponseEntity.status(HttpStatus.CREATED).body(c);
 			
 		}
 		 catch(Exception e)

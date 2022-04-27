@@ -1,24 +1,63 @@
 package com.billing.Services;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.billing.Repository.AreaRepository;
+import com.billing.Repository.CityRepository;
 import com.billing.entities.Area;
+import com.billing.entities.City;
 
 
 @Service
 public class AreaService {
+	
 	@Autowired
 	private AreaRepository areaRepository;
+	
+	@Autowired
+	private CityRepository cityRepository;
 	
 	public List<Area> getAllArea()
 	{
 		List<Area> list=(List<Area>)this.areaRepository.findAll();
 		return list;
 		
+	}
+	
+	
+	//Adding the Area
+	
+	public Area addArea(Map<String,Object> mp)
+	{
+		Area result=null;
+		try {
+			Long areaCode =  Long.parseLong((String) mp.get("area_code"));
+			String areaName = (String) mp.get("area_name");
+			
+			Long cityId=Long.parseLong((String) mp.get("city_id"));
+			Long areaId =  Long.parseLong((String) mp.get("area_id"));
+			Optional<City> city = cityRepository.findById(cityId);
+			
+			Area area = new Area();
+			
+			area.setArea_code(areaCode);
+			area.setArea_name(areaName);
+			area.setCity_id(city.get());
+			
+			 result=areaRepository.save(area);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+	   
+		return result;
+				
 	}
 	
 	//get the single Area by id
@@ -41,14 +80,7 @@ public class AreaService {
 				
 			}
 			
-			//Adding the Area
 			
-			public Area addArea(Area a)
-			{
-				Area result=areaRepository.save(a);
-				return result;
-				
-			}
 			
 			//delete area
 			

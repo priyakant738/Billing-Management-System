@@ -65,22 +65,22 @@ public class OrderService {
 				
 				Order list= orderRepository.getById(id);
 				
-				list.setAgency_id(order.getAgency_id());
-				list.setDealer_id(order.getDealer_id());
-				list.setRetailer_id(order.getRetailer_id());
-				list.setGross_amount(order.getDiscount_amount());
-				list.setDiscount_amount(order.getDiscount_amount());
-				list.setNet_amount(order.getNet_amount());
-				list.setOrder_number(order.getOrder_number());
-				list.setOrder_date(order.getOrder_date());
-				list.setOrder_status(order.getOrder_status());
-				list.setOrder_type(order.getOrder_type());
-				list.setOrder_duedate(order.getOrder_date());
-				list.setPayment_type(order.getOrder_type());
-				list.setPayment_date(order.getPayment_date());
-				list.setPayment_status(order.getOrder_status());
-				list.setPayment_id(order.getPayment_id());
-				list.setPayment_mode(order.getPayment_mode());				
+//				list.setAgency_id(order.getAgency_id());
+//				list.setDealer_id(order.getDealer_id());
+//				list.setRetailer_id(order.getRetailer_id());
+//				list.setGross_amount(order.getDiscount_amount());
+//				list.setDiscount_amount(order.getDiscount_amount());
+//				list.setNet_amount(order.getNet_amount());
+//				list.setOrder_number(order.getOrder_number());
+//				list.setOrder_date(order.getOrder_date());
+//				list.setOrder_status(order.getOrder_status());
+//				list.setOrder_type(order.getOrder_type());
+//				list.setOrder_duedate(order.getOrder_date());
+//				list.setPayment_type(order.getOrder_type());
+//				list.setPayment_date(order.getPayment_date());
+//				list.setPayment_status(order.getOrder_status());
+//				list.setPayment_id(order.getPayment_id());
+//				list.setPayment_mode(order.getPayment_mode());				
 				
 				orderRepository.save(list);
 				

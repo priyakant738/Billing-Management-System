@@ -2,6 +2,8 @@ package com.billing.controller;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,14 +21,16 @@ import com.billing.entities.Category;
 @Controller
 public class CategoryController {
 	
-	//get all Category handler
 	
-		private Object categoryService;
+	    @Autowired
+		private CategoryService categoryService;
+	    
+	  //get all Category handler
 
 		@GetMapping("/category")
 		public ResponseEntity<List<Category>> getCategory()
 		{
-			List<Category>list = CategoryService.getAllCategory();
+			List<Category>list = categoryService.getAllCategory();
 			if(list.size()<= 0)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -57,8 +61,8 @@ public class CategoryController {
 					
 					try
 					{
-						c = this.categoryService.Category(category);
-						System.out.println(category);
+						c = this.categoryService.addCategory(category);
+						
 						return ResponseEntity.status(HttpStatus.CREATED).build();
 						
 					}

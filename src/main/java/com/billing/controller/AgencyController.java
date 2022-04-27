@@ -1,6 +1,7 @@
 package com.billing.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class AgencyController
 			//new agency handler
 			
 			@PostMapping("/agency/addagency")
-			public ResponseEntity<Agency> addAgency(@RequestBody Agency agency)
+			public ResponseEntity<Agency> addAgency(@RequestBody Map<String, Object> agency)
 			{
 				Agency aa = null;
 				

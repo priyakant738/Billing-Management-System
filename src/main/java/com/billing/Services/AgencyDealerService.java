@@ -61,13 +61,13 @@ public class AgencyDealerService {
 	}
 	
 	
-	//update the agencydealer
+	//update the AgencyDealer
 	
 	public AgencyDealer updateAgencyDealer(AgencyDealer agencyDealer, Long id)
 	{
 		AgencyDealer list = agencyDealerRepository.getById(id);
-		list.setAgency_id(agencyDealer.getAgency_id());
-		list.setDealer_id(agencyDealer.getDealer_id());
+		//list.setAgency_id(agencyDealer.getAgency_id());
+		//list.setDealer_id(agencyDealer.getDealer_id());
 		list.setCategory_id(agencyDealer.getCategory_id());
 		list.setProduct_id(agencyDealer.getProduct_id());
 		list.setProduct_grossamount(agencyDealer.getProduct_grossamount());

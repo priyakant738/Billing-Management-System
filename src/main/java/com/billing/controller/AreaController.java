@@ -1,6 +1,7 @@
 package com.billing.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class AreaController {
 		//new Area handler
 		
 		@PostMapping("/area/addarea")
-		public ResponseEntity<Area> addArea(@RequestBody Area area)
+		public ResponseEntity<Area> addArea(@RequestBody Map<String, Object> area)
 		{
 			Area a = null;
 			
