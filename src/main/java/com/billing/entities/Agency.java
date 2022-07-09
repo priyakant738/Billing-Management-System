@@ -1,128 +1,144 @@
 package com.billing.entities;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Agency")
+//     uniqueConstraints={
+//    @UniqueConstraint(columnNames = {"agency_Name", "owner_firstname", "owner_Lastname", "agency_Address"})
+//	})
+
 public class Agency  extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long agency_id;
+	@Column(name="agency_id")
+	private Long agencyId;
 	
-	@Column(name ="agency_name")
-	private String agency_name;
+	@Column(name ="agency_Name")
+	private String agencyName;
 	
-	@Column(name ="owner_first_name")
-	private String owner_first_name;
+	@Column(name ="owner_firstname")
+	private String ownerFirstName;
 	
-	@Column(name ="owner_last_name")
-	private String owner_last_name;
+	@Column(name ="owner_Lastname")
+	private String ownerLastName;
 	
-	@Column(name ="agency_address")
-	private String agency_address;
+	@Column(name ="agency_Address")
+	private String agencyAddress;
 	
-	@Column(name ="agency_pincode")
-	private String agency_pincode;
+	@Column(name ="agency_Pincode")
+	private String agencyPincode;
 	
 	
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "state_id")
-	private State state_id;
+	private State stateId;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "city_id")
-	private City city_id;
+	private City cityId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private Set<Category> category_id;
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	private Set<Product> product;
-	
-	
-	
+	@Column(name ="Pancard")
 	private String pancard;
-	private String gstin_number;
-	public Long getAgency_id() {
-		return agency_id;
+	
+	@Column(name ="gstin_Number")
+	private String gstinNumber;
+
+	
+
+	public Long getAgencyId() {
+		return agencyId;
 	}
-	public void setAgency_id(Long agency_id) {
-		this.agency_id = agency_id;
+
+	public void setAgencyId(Long agencyId) {
+		this.agencyId = agencyId;
 	}
-	public String getAgency_name() {
-		return agency_name;
+
+	public String getAgencyName() {
+		return agencyName;
 	}
-	public void setAgency_name(String agency_name) {
-		this.agency_name = agency_name;
+
+	public void setAgencyName(String agencyName) {
+		this.agencyName = agencyName;
 	}
-	public String getOwner_first_name() {
-		return owner_first_name;
+
+	public String getOwnerFirstName() {
+		return ownerFirstName;
 	}
-	public void setOwner_first_name(String owner_first_name) {
-		this.owner_first_name = owner_first_name;
+
+	public void setOwnerFirstName(String ownerFirstName) {
+		this.ownerFirstName = ownerFirstName;
 	}
-	public String getOwner_last_name() {
-		return owner_last_name;
+
+	public String getOwnerLastname() {
+		return ownerLastName;
 	}
-	public void setOwner_last_name(String owner_last_name) {
-		this.owner_last_name = owner_last_name;
+
+	public void setOwnerLastname(String ownerLastname) {
+		this.ownerLastName = ownerLastname;
 	}
-	public String getAgency_address() {
-		return agency_address;
+
+	public String getAgencyAddress() {
+		return agencyAddress;
 	}
-	public void setAgency_address(String agency_address) {
-		this.agency_address = agency_address;
+
+	public void setAgencyAddress(String agencyAddress) {
+		this.agencyAddress = agencyAddress;
 	}
-	public String getAgency_pincode() {
-		return agency_pincode;
+
+	public String getAgencyPincode() {
+		return agencyPincode;
 	}
-	public void setAgency_pincode(String agency_pincode) {
-		this.agency_pincode = agency_pincode;
+
+	public void setAgencyPincode(String agencyPincode) {
+		this.agencyPincode = agencyPincode;
 	}
-	public State getState_id() {
-		return state_id;
+
+	
+
+	public String getOwnerLastName() {
+		return ownerLastName;
 	}
-	public void setState_id(State state_id) {
-		this.state_id = state_id;
+
+	public void setOwnerLastName(String ownerLastName) {
+		this.ownerLastName = ownerLastName;
 	}
-	public City getCity_id() {
-		return city_id;
+
+	public State getStateId() {
+		return stateId;
 	}
-	public void setCity_id(City city_id) {
-		this.city_id = city_id;
+
+	public void setStateId(State stateId) {
+		this.stateId = stateId;
 	}
-	public Set<Category> getCategory_id() {
-		return category_id;
+
+	public City getCityId() {
+		return cityId;
 	}
-	public void setCategory_id(Set<Category> category_id) {
-		this.category_id = category_id;
+
+	public void setCityId(City cityId) {
+		this.cityId = cityId;
 	}
-	public Set<Product> getProduct() {
-		return product;
-	}
-	public void setProduct(Set<Product> product) {
-		this.product = product;
-	}
+
 	public String getPancard() {
 		return pancard;
 	}
+
 	public void setPancard(String pancard) {
 		this.pancard = pancard;
 	}
-	public String getGstin_number() {
-		return gstin_number;
+
+	public String getGstinNumber() {
+		return gstinNumber;
 	}
-	public void setGstin_number(String gstin_number) {
-		this.gstin_number = gstin_number;
+
+	public void setGstinNumber(String gstinNumber) {
+		this.gstinNumber = gstinNumber;
 	}
 	
-	
-	
+
 	
 	
 }

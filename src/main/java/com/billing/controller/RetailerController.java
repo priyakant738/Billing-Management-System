@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.billing.Services.RetailerService;
 import com.billing.entities.Retailer;
 import com.billing.entities.State;
+import com.billing.modelDTO.RetailerModel;
 
 @Controller
 public class RetailerController {
@@ -26,10 +27,10 @@ public class RetailerController {
 	
 	//get all state handler
 	
-		@GetMapping("/retailer")
-		public ResponseEntity<List<Retailer>> getRetailer()
+		@GetMapping("/retailer/getAllretailer")
+		public ResponseEntity<List<RetailerModel>> getRetailer()
 		{
-			List<Retailer>list = retailerService.getAllRetailer();
+			List<RetailerModel>list = retailerService.getAllRetailer();
 			if(list.size()<= 0)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -40,7 +41,7 @@ public class RetailerController {
 		
 		//get single state handler
 		
-		@GetMapping("/retailer/{id}")
+		@GetMapping("/retailer/getByid/{id}")
 		public ResponseEntity<Retailer> getRetailer(@PathVariable("id")Long id)
 		{
 			Retailer retailer = retailerService.getRetailerByid(id);
@@ -53,7 +54,7 @@ public class RetailerController {
 		
 		//new retailer handler
 		
-		@PostMapping("/retailer")
+		@PostMapping("/retailer/addretailer")
 		public ResponseEntity<Retailer> addRetailer(@RequestBody Retailer retailer)
 		{
 			Retailer r = null;
@@ -75,8 +76,8 @@ public class RetailerController {
 		
 		//delete retailer handler
 		
-		@DeleteMapping("/retailer/{id}")
-		public ResponseEntity<Object> deleteRetailer(@PathVariable("id")Long id)
+		@DeleteMapping("/retailer/deleteByid/{id}")
+		public ResponseEntity<Retailer> deleteRetailer(@PathVariable("id")Long id)
 		{
 			try
 		  {
@@ -92,7 +93,7 @@ public class RetailerController {
 		
 		
 		//update retailer handler
-		@PutMapping("/retailer/{id}")
+		@PutMapping("/retailer/updateByid/{id}")
 		public ResponseEntity<Retailer> updateState(@RequestBody Retailer retailer,@PathVariable("id") Long id)
 		{
 		   

@@ -7,63 +7,69 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "Dealer")
+@Table(name = "Dealer", uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"dealer_FirstName", "dealer_LastName"
+	    		,"dealer_Address"})
+	})
 public class Dealer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long dealer_id;	
+	@Column(name ="dealer_id")
+	private Long dealerId;	
 	
-	@Column(name ="dealer_firstName")
-	private String dealer_firstname;
+	@Column(name ="dealer_FirstName")
+	private String dealerFirstName;
 	
-	@Column(name ="dealer_lastName")
-	private String dealer_lastname;
+	@Column(name ="dealer_LastName")
+	private String dealerLastName;
 	
-	@Column(name ="dealer_address")
-	private String dealer_address;
+	@Column(name ="dealer_Address")
+	private String dealerAddress;
 	
 	@Column(name ="PinCode")
 	private Long pincode;
 	
 	@ManyToOne
 	@JoinColumn(name = "city_id")
-	private City city_id;
+	private City cityId;
 
 	@ManyToOne
 	@JoinColumn(name = "state_id")
-	private State state_id;
+	private State stateId;
 
-	public Long getDealer_id() {
-		return dealer_id;
+	
+
+	public Long getDealerId() {
+		return dealerId;
 	}
 
-	public void setDealer_id(Long dealer_id) {
-		this.dealer_id = dealer_id;
+	public void setDealerId(Long dealerId) {
+		this.dealerId = dealerId;
 	}
 
-	public String getDealer_firstname() {
-		return dealer_firstname;
+	public String getDealerFirstname() {
+		return dealerFirstName;
 	}
 
-	public void setDealer_firstname(String dealer_firstname) {
-		this.dealer_firstname = dealer_firstname;
+	public void setDealerFirstname(String dealerFirstname) {
+		this.dealerFirstName = dealerFirstname;
 	}
 
-	public String getDealer_lastname() {
-		return dealer_lastname;
+	public String getDealerLastName() {
+		return dealerLastName;
 	}
 
-	public void setDealer_lastname(String dealer_lastname) {
-		this.dealer_lastname = dealer_lastname;
+	public void setDealerLastName(String dealerLastName) {
+		this.dealerLastName = dealerLastName;
 	}
 
-	public String getDealer_address() {
-		return dealer_address;
+	public String getDealerAddress() {
+		return dealerAddress;
 	}
 
-	public void setDealer_address(String dealer_address) {
-		this.dealer_address = dealer_address;
+	public void setDealerAddress(String dealerAddress) {
+		this.dealerAddress = dealerAddress;
 	}
 
 	public Long getPincode() {
@@ -74,22 +80,46 @@ public class Dealer extends BaseClass<String>{
 		this.pincode = pincode;
 	}
 
-	public City getCity_id() {
-		return city_id;
+	public String getDealerFirstName() {
+		return dealerFirstName;
 	}
 
-	public void setCity_id(City city_id) {
-		this.city_id = city_id;
+	public void setDealerFirstName(String dealerFirstName) {
+		this.dealerFirstName = dealerFirstName;
 	}
 
-	public State getState_id() {
-		return state_id;
+	public City getCityId() {
+		return cityId;
 	}
 
-	public void setState_id(State state_id) {
-		this.state_id = state_id;
+	public void setCityId(City cityId) {
+		this.cityId = cityId;
+	}
+
+	public State getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(State stateId) {
+		this.stateId = stateId;
+	}
+
+	@Override
+	public String toString() {
+		return "Dealer [cityId=" + cityId 
+		+ ", dealerAddress=" + dealerAddress 
+		+ ", dealerFirstName=" + dealerFirstName
+				+ ", dealerId=" + dealerId 
+				+ ", dealerLastName=" + dealerLastName 
+				+ ", pincode=" + pincode
+				+ ", stateId=" + stateId + "]";
 	}
 
 	
+
+	
+   
+	
+
 	
 }

@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.billing.Services.OrderService;
-import com.billing.entities.City;
 import com.billing.entities.Order;
+import com.billing.modelDTO.OrderModel;
 
 @Controller
 public class OrderController {
@@ -26,10 +25,10 @@ public class OrderController {
 	
 	//get all Order handler
 	
-		@GetMapping("/order")
-		public ResponseEntity<List<Order>> getOrder()
+		@GetMapping("/order/getAllorder")
+		public ResponseEntity<List<OrderModel>> getOrder()
 		{
-			List<Order>list = orderService.getAllOrder();
+			List<OrderModel>list = orderService.getAllOrder();
 			if(list.size()<= 0)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -40,7 +39,7 @@ public class OrderController {
 		
 		//get single order handler
 		
-		@GetMapping("/order/{id}")
+		@GetMapping("/order/getByid/{id}")
 		public ResponseEntity<Order> getOrder(@PathVariable("id")Long id)
 		{
 			Order order = orderService.getOrderByid(id);
@@ -76,7 +75,7 @@ public class OrderController {
 		
 		//delete Order handler
 		
-		@DeleteMapping("/order/{id}")
+		@DeleteMapping("/order/deleteByid/{id}")
 		public ResponseEntity<Order> deleteOrder(@PathVariable("id")Long id)
 		{
 			try
@@ -92,11 +91,32 @@ public class OrderController {
 		}
 		
 		//update order handler
-		@PutMapping("/order/{id}")
-		public ResponseEntity<Order> updateOrder(@RequestBody Order order,@PathVariable("city_id") Long id)
+		@PutMapping("/order/updateByid/{id}")
+		public ResponseEntity<Order> updateOrder(@RequestBody Order order,@PathVariable("id") Long id)
 		{
 		  try {
 			  Order List=this.orderService.updateOrder(order, id);
+			  return ResponseEntity.status(HttpStatus.OK).body(List);
+		  }
+		  catch(Exception e){
+			  
+			  e.printStackTrace();
+			  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			  
+		  }
+		 
+		  
+		}
+		
+		
+		
+		@GetMapping("/order/getorder/{orderFromDate}/{ordertoDate}")
+		public ResponseEntity<List<Object>> GetOrdersByDate(@PathVariable ("orderFromDate") String orderFromDate,
+				@PathVariable("ordertoDate") String ordertoDate)
+		{
+		  try {
+			
+			List<Object> List=this.orderService.GetOrders(orderFromDate, ordertoDate);
 			  return ResponseEntity.status(HttpStatus.OK).body(List);
 		  }
 		  catch(Exception e){

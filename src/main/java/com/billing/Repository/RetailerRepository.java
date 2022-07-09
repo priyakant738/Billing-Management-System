@@ -6,8 +6,8 @@ import com.billing.entities.Retailer;
 
 public interface RetailerRepository extends JpaRepository<Retailer, Long>{
 	
-	@Query("select r from Retailer r where r.retailer_id = :id")
-	public Retailer find(@Param("id") Long id);
+//	@Query("select r from Retailer r where r.retailerid = :id")
+//	public Retailer find(@Param("id") Long id);
 	
 
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.billing.Repository.DealerRepository;
 import com.billing.entities.Dealer;
+import com.billing.modelDTO.DealerModel;
 
 
 
@@ -15,10 +16,19 @@ public class DealerService
 	@Autowired
 	private DealerRepository dealerRepository;
 
-	public List<Dealer> getAllDealer()
+	public List<DealerModel> getAllDealer()
 	{
 		List<Dealer> list=(List<Dealer>)this.dealerRepository.findAll();
-		return list;
+		
+		List<DealerModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+			list1.add(new DealerModel(e.getDealerFirstname(),e.getDealerLastName(),
+					e.getDealerAddress(),e.getPincode(),
+					e.getCityId().getCityName(),e.getStateId().getStateName()));
+		});
+		
+		return list1;
 		
 	}
 	
@@ -31,7 +41,7 @@ public class DealerService
 		Dealer dealer=null;
 		try 
 		{
-			 dealer = this.dealerRepository.find(id);
+			 dealer = this.dealerRepository.getById(id);
 			 
 			
 		}
@@ -67,12 +77,12 @@ public class DealerService
 			{
 				
 				Dealer list= dealerRepository.getById(id);
-				list.setDealer_firstname(dealer.getDealer_firstname());
-				list.setDealer_lastname(dealer.getDealer_lastname());
-				list.setDealer_address(dealer.getDealer_address());
+				list.setDealerFirstname(dealer.getDealerFirstname());
+				list.setDealerLastName(dealer.getDealerLastName());
+				list.setDealerAddress(dealer.getDealerAddress());
 				list.setPincode(dealer.getPincode());
-				list.setState_id(dealer.getState_id());
-				list.setCity_id(dealer.getCity_id());
+				list.setStateId(dealer.getStateId());
+				list.setCityId(dealer.getCityId());
 				
 				dealerRepository.save(list);
 				

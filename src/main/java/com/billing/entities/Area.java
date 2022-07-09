@@ -3,68 +3,63 @@ package com.billing.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Area")
+@Table(name = "Area"  , uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"area_Code", "area_Name"})
+	})
+
 public class Area extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long area_id;
-	
-//	@OneToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="city_id")
-//	private City city_id;
+	@JoinColumn(name="area_id")
+	private Long areaId;
 	
 	@ManyToOne
-	@JoinColumn(name="city_id")
-	private City city_id;
+	@JoinColumn(name="city")
+	private City cityId;
 	
 	@Column(name ="area_Code")
-	private Long area_code;
+	private Long areaCode;
 	
-	@Column(name ="area_name")
-	private String area_name;
+	@Column(name ="area_Name")
+	private String areaName;
 
-	public Long getArea_id() {
-		return area_id;
+	public Long getAreaId() {
+		return areaId;
 	}
 
-  
-
-	public City getCity_id() {
-		return city_id;
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 
-
-
-	public void setCity_id(City city_id) {
-		this.city_id = city_id;
+	public City getCityId() {
+		return cityId;
 	}
 
-
-
-	public Long getArea_code() {
-		return area_code;
+	public void setCityId(City cityId) {
+		this.cityId = cityId;
 	}
 
-	public void setArea_code(Long area_code) {
-		this.area_code = area_code;
+	public Long getAreaCode() {
+		return areaCode;
 	}
 
-	public String getArea_name() {
-		return area_name;
+	public void setAreaCode(Long areaCode) {
+		this.areaCode = areaCode;
 	}
 
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
+	public String getAreaName() {
+		return areaName;
 	}
 
-	public void setArea_id(Long area_id) {
-		this.area_id = area_id;
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 	
+
 	
-	
+
 	
 
 }

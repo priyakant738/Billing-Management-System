@@ -1,5 +1,6 @@
 package com.billing.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +12,8 @@ import com.billing.Repository.AreaRepository;
 import com.billing.Repository.CityRepository;
 import com.billing.entities.Area;
 import com.billing.entities.City;
+import com.billing.entities.State;
+import com.billing.modelDTO.AreaModel;
 
 
 @Service
@@ -19,43 +22,27 @@ public class AreaService {
 	@Autowired
 	private AreaRepository areaRepository;
 	
-	@Autowired
-	private CityRepository cityRepository;
+	//get all area
 	
-	public List<Area> getAllArea()
+	public List<AreaModel> getAllArea()
 	{
 		List<Area> list=(List<Area>)this.areaRepository.findAll();
-		return list;
+		
+		List<AreaModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+			list1.add(new AreaModel(e.getAreaCode(),e.getAreaName(),e.getCityId().getCityName()));
+		});
+		return list1;
 		
 	}
 	
 	
 	//Adding the Area
 	
-	public Area addArea(Map<String,Object> mp)
+	public Area addArea(Area a)
 	{
-		Area result=null;
-		try {
-			Long areaCode =  Long.parseLong((String) mp.get("area_code"));
-			String areaName = (String) mp.get("area_name");
-			
-			Long cityId=Long.parseLong((String) mp.get("city_id"));
-			Long areaId =  Long.parseLong((String) mp.get("area_id"));
-			Optional<City> city = cityRepository.findById(cityId);
-			
-			Area area = new Area();
-			
-			area.setArea_code(areaCode);
-			area.setArea_name(areaName);
-			area.setCity_id(city.get());
-			
-			 result=areaRepository.save(area);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}
-	   
+		Area result=areaRepository.save(a);
 		return result;
 				
 	}
@@ -68,7 +55,7 @@ public class AreaService {
 				Area area=null;
 				try 
 				{
-					 area = this.areaRepository.find(id);
+					 area = this.areaRepository.getById(id);
 					 
 					
 				}
@@ -79,7 +66,6 @@ public class AreaService {
 				return area;
 				
 			}
-			
 			
 			
 			//delete area
@@ -95,9 +81,11 @@ public class AreaService {
 			{
 				
 				Area list = areaRepository.getById(id);
-				list.setCity_id(area.getCity_id());
-				list.setArea_code(area.getArea_code());
-				list.setArea_name(area.getArea_name());
+				list.setCityId(area.getCityId());
+				list.setAreaCode(area.getAreaCode());
+				list.setAreaName(area.getAreaName());
+				
+				areaRepository.save(list);
 				return list;
 			}
 

@@ -1,79 +1,117 @@
 package com.billing.entities;
 
-import java.util.*;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Dealer_Retailer")
+@Table(name = "dealerretailer")
 public class DealerRetailer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long dealer_retailer_id;
+	@Column(name ="dealerretailer_Id")
+	private Long dealerretailerid;
 	
 	@OneToOne
 	@JoinColumn(name = "dealer_id")
-	private Dealer dealer_id;
+	private Dealer dealerId;
 	
 	@OneToOne
 	@JoinColumn(name = "retailer_id")
-	private Retailer retailer_id;
+	private Retailer retailerId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "category_id")
-	private List<Category> category_id;
+	private Category categoryId;
 	
-	@OneToMany(cascade=CascadeType.ALL,targetEntity= DealerRetailer.class)
+	@OneToOne
 	@JoinColumn(name = "product_id")
-	private List<Product>product_id;
+	private Product productId;
 
-	public Long getDealer_retailer_id() {
-		return dealer_retailer_id;
+	@Column(name ="product_Grossamount")
+	private String productGrossamount;
+	
+	@Column(name ="product_Netamount")
+	private String productNetamount;
+	
+	@Column(name ="product_Discount")
+	private String productDiscount;
+	
+	@Column(name ="status")
+	private String status;
+
+	public Long getDealerretailerid() {
+		return dealerretailerid;
 	}
 
-	public void setDealer_retailer_id(Long dealer_retailer_id) {
-		this.dealer_retailer_id = dealer_retailer_id;
-	}
-
-	public Dealer getDealer_id() {
-		return dealer_id;
-	}
-
-	public void setDealer_id(Dealer dealer_id) {
-		this.dealer_id = dealer_id;
-	}
-
-	public Retailer getRetailer_id() {
-		return retailer_id;
-	}
-
-	public void setRetailer_id(Retailer retailer_id) {
-		this.retailer_id = retailer_id;
-	}
-
-	public List<Category> getCategory_id() {
-		return category_id;
-	}
-
-	public void setCategory_id(List<Category> category_id) {
-		this.category_id = category_id;
-	}
-
-	public List<Product> getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(List<Product> product_id) {
-		this.product_id = product_id;
+	public void setDealerretailerid(Long dealerretailerid) {
+		this.dealerretailerid = dealerretailerid;
 	}
 
 	
-	
-	
-	
-	
-	
-	
 
+	public Dealer getDealerId() {
+		return dealerId;
+	}
+
+	public void setDealerId(Dealer dealerId) {
+		this.dealerId = dealerId;
+	}
+
+	public Retailer getRetailerId() {
+		return retailerId;
+	}
+
+	public void setRetailerId(Retailer retailerId) {
+		this.retailerId = retailerId;
+	}
+
+	public Category getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Category categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Product getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Product productId) {
+		this.productId = productId;
+	}
+
+	public String getProductGrossamount() {
+		return productGrossamount;
+	}
+
+	public void setProductGrossamount(String productGrossamount) {
+		this.productGrossamount = productGrossamount;
+	}
+
+	public String getProductNetamount() {
+		return productNetamount;
+	}
+
+	public void setProductNetamount(String productNetamount) {
+		this.productNetamount = productNetamount;
+	}
+
+	public String getProductDiscount() {
+		return productDiscount;
+	}
+
+	public void setProductDiscount(String productDiscount) {
+		this.productDiscount = productDiscount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 }

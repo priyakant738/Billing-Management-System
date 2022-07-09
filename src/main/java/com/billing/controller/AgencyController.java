@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.billing.Services.AgencyService;
 import com.billing.entities.Agency;
+import com.billing.modelDTO.AgencyModel;
 
 @Controller
 public class AgencyController 
@@ -23,10 +24,10 @@ public class AgencyController
 	@Autowired
 	private AgencyService agencyService;
 	
-	@GetMapping("/agency")
-	public ResponseEntity<List<Agency>> getAgency()
+	@GetMapping("/agency/getAllagency")
+	public ResponseEntity<List<AgencyModel>> getAgency()
 	{
-		List<Agency>list = agencyService.getAllAgency();
+		List<AgencyModel>list = agencyService.getAllAgency();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -37,7 +38,7 @@ public class AgencyController
 	
 	//get single agency handler
 	
-			@GetMapping("/agency/{id}")
+			@GetMapping("/agency/getByid/{id}")
 			public ResponseEntity<Agency> getAgency(@PathVariable("id")Long id)
 			{
 				Agency agency = agencyService.getAgencyByid(id);
@@ -52,13 +53,13 @@ public class AgencyController
 			//new agency handler
 			
 			@PostMapping("/agency/addagency")
-			public ResponseEntity<Agency> addAgency(@RequestBody Map<String, Object> agency)
+			public ResponseEntity<Agency> addAgency(@RequestBody Agency agency)
 			{
-				Agency aa = null;
+				Agency a = null;
 				
 				try
 				{
-					aa = this.agencyService.addAgency(agency);
+					a = this.agencyService.addAgency(agency);
 					System.out.println(agency);
 					return ResponseEntity.status(HttpStatus.CREATED).build();
 					
@@ -74,8 +75,8 @@ public class AgencyController
 			
 			//delete agency handler
 			
-			@DeleteMapping("/agency/{id}")
-			public ResponseEntity<Object> deleteAgency(@PathVariable("id")Long id)
+			@DeleteMapping("/agency/deleteByid/{id}")
+			public ResponseEntity<Agency> deleteAgency(@PathVariable("id")Long id)
 			{
 				try
 			  {
@@ -90,12 +91,21 @@ public class AgencyController
 			}
 	
 			//update agency handler
-			@PutMapping("/agency/{id}")
-			public Agency updateAgency(@RequestBody Agency agency,@PathVariable("id") Long id)
+			@PutMapping("/agency/updateByid/{id}")
+			public ResponseEntity<Agency> updateAgency(@RequestBody Agency agency,@PathVariable("id") Long id)
 			{
-				this.agencyService.updateAgency(agency, id);
-				   return agency;
+				try {
+				      Agency List = this.agencyService.updateAgency(agency, id);
+				      return ResponseEntity.status(HttpStatus.OK).body(List);
 			}
-
+				
+				 catch(Exception e){
+					  
+					  e.printStackTrace();
+					  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+					  
+				  }
+				
+			}
 
 	}

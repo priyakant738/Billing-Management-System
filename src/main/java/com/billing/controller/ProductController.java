@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.billing.Services.ProductService;
 import com.billing.entities.Product;
+import com.billing.modelDTO.ProductModel;
 
 @Controller
 public class ProductController {
@@ -26,10 +27,10 @@ public class ProductController {
 	
 	//get all Product handler
 	
-	@GetMapping("/product")
-	public ResponseEntity<List<Product>> getProduct()
+	@GetMapping("/product/getAllproduct")
+	public ResponseEntity<List<ProductModel>> getProduct()
 	{
-		List<Product>list = productService.getAllProduct();
+		List<ProductModel>list = productService.getAllProduct();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -40,7 +41,7 @@ public class ProductController {
 	
 	
 	//get single Product handler
-	@GetMapping("/product/{id}")
+	@GetMapping("/product/getByid/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable("id")Long id)
 	{
 		Product product = productService.getProductByid(id);
@@ -54,7 +55,7 @@ public class ProductController {
 	
 	//new Product handler
 	
-	@PostMapping("/product")
+	@PostMapping("/product/addproduct")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product)
 	{
 		Product p = null;
@@ -77,8 +78,8 @@ public class ProductController {
 	
 	//delete product handler
 	
-	@DeleteMapping("/product/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable("id")Long id)
+	@DeleteMapping("/product/deleteByid/{id}")
+	public ResponseEntity<Product> deleteProduct(@PathVariable("id")Long id)
 	{
 		try
 	  {
@@ -93,8 +94,8 @@ public class ProductController {
 	}
 	
 	//update Product handler
-	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable("city_id") Long id)
+	@PutMapping("/product/updateByid/{id}")
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable("id") Long id)
 	{
 	  try {
 		  Product List=this.productService.updateProduct(product, id);

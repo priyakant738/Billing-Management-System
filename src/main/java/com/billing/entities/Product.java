@@ -5,134 +5,118 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Product", uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"Product_Name", "Product_Code"})
+	})
 public class Product extends BaseClass<String>{
 	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long product_id;
+	@Column(name ="product_id")
+	private Long productId;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
-	private Category category_id;
+	private Category categoryId;
 	
 	@ManyToOne
 	@JoinColumn(name = "agency_id")
-	private Agency agency_id;
+	private Agency agencyId;
 	 
 	@Column(name ="Product_Name")
-	private String product_name;
+	private String productName;
 	
 	@Column(name ="Product_Code")
-	private Long product_code;	
+	private Long productCode;	
 	
 	@Column(name ="Product_Price")
-	private Long product_price;
+	private Long productPrice;
 	
 	@Column(name ="Product_Desc")
-	private String product_desc;
+	private String productDesc;
 	
 	@Column(name ="Product_Status")
-	private String product_status;
+	private String productStatus;
+
+
+
+
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Category getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Category categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Agency getAgencyId() {
+		return agencyId;
+	}
+
+	public void setAgencyId(Agency agencyId) {
+		this.agencyId = agencyId;
+	}
+
+	public Long getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(Long productCode) {
+		this.productCode = productCode;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Long getProduct_Code() {
+		return productCode;
+	}
+
+	public void setProduct_Code(Long product_Code) {
+		this.productCode = product_Code;
+	}
+
+	public Long getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(Long productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getProductDesc() {
+		return productDesc;
+	}
+
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
+	}
+
+	public String getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
+	}
+
 	
-	@ManyToOne
-	private AgencyDealer AgencyDealer;
-	
-	@ManyToOne
-	private DealerRetailer DealerRetailer;
-	
-	@ManyToOne
-	private OrderDetail OrderDeatil;
-
-	public Long getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(Long product_id) {
-		this.product_id = product_id;
-	}
-
-	public Category getCategory_id() {
-		return category_id;
-	}
-
-	public void setCategory_id(Category category_id) {
-		this.category_id = category_id;
-	}
-
-	public Agency getAgency_id() {
-		return agency_id;
-	}
-
-	public void setAgency_id(Agency agency_id) {
-		this.agency_id = agency_id;
-	}
-
-	public String getProduct_name() {
-		return product_name;
-	}
-
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
-	}
-
-	public Long getProduct_code() {
-		return product_code;
-	}
-
-	public void setProduct_code(Long product_code) {
-		this.product_code = product_code;
-	}
-
-	public Long getProduct_price() {
-		return product_price;
-	}
-
-	public void setProduct_price(Long product_price) {
-		this.product_price = product_price;
-	}
-
-	public String getProduct_desc() {
-		return product_desc;
-	}
-
-	public void setProduct_desc(String product_desc) {
-		this.product_desc = product_desc;
-	}
-
-	public String getProduct_status() {
-		return product_status;
-	}
-
-	public void setProduct_status(String product_status) {
-		this.product_status = product_status;
-	}
-
-	public AgencyDealer getAgencyDealer() {
-		return AgencyDealer;
-	}
-
-	public void setAgencyDealer(AgencyDealer agencyDealer) {
-		AgencyDealer = agencyDealer;
-	}
-
-	public DealerRetailer getDealerRetailer() {
-		return DealerRetailer;
-	}
-
-	public void setDealerRetailer(DealerRetailer dealerRetailer) {
-		DealerRetailer = dealerRetailer;
-	}
-
-	public OrderDetail getOrderDeatil() {
-		return OrderDeatil;
-	}
-
-	public void setOrderDeatil(OrderDetail orderDeatil) {
-		OrderDeatil = orderDeatil;
-	}
 
 	
 	

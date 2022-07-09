@@ -1,8 +1,8 @@
 package com.billing.entities;
 
-import java.util.ArrayList;
+
+
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,87 +22,104 @@ public class OrderDetail extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long orderdetail_id;
+	@Column(name ="orderdetail_id")
+	private Long orderdetailId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "product_id")
-	private Set<Product> product_id;
+	private Product productId;
 	
-	@Column(name ="product_qty")
-	private Long product_qty;
+	@Column(name ="product_Qty")
+	private Long productQty;
 	
-	@Column(name ="product_amount")
-	private Long product_amount;
+	@Column(name ="product_Amount")
+	private Long productAmount;
 	
-	@Column(name ="product_rossamount")
-	private Long product_grossamount;
+	@Column(name ="product_Grossamount")
+	private Long productGrossamount;
 	
-	@Column(name ="product_discount")
-	private String product_discount;
+	@Column(name ="product_Discount")
+	private Long productDiscount;
 	
-	@Column(name ="product_netamount")
-	private Long product_netamount;
+	@Column(name ="product_Netamount")
+	private Long productNetamount;
 
-	public Long getOrderdetail_id() {
-		return orderdetail_id;
-	}
-
-	public void setOrderdetail_id(Long orderdetail_id) {
-		this.orderdetail_id = orderdetail_id;
-	}
-
-	public Set<Product> getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(Set<Product> product_id) {
-		this.product_id = product_id;
-	}
-
-	public Long getProduct_qty() {
-		return product_qty;
-	}
-
-	public void setProduct_qty(Long product_qty) {
-		this.product_qty = product_qty;
-	}
-
-	public Long getProduct_amount() {
-		return product_amount;
-	}
-
-	public void setProduct_amount(Long product_amount) {
-		this.product_amount = product_amount;
-	}
-
-	public Long getProduct_grossamount() {
-		return product_grossamount;
-	}
-
-	public void setProduct_grossamount(Long product_grossamount) {
-		this.product_grossamount = product_grossamount;
-	}
-
-	public String getProduct_discount() {
-		return product_discount;
-	}
-
-	public void setProduct_discount(String product_discount) {
-		this.product_discount = product_discount;
-	}
-
-	public Long getProduct_netamount() {
-		return product_netamount;
-	}
-
-	public void setProduct_netamount(Long product_netamount) {
-		this.product_netamount = product_netamount;
-	}
-
-	
+	@OneToMany
+	private List<Order> orderId;
 
 	
 	
+
+	
+
+	public Long getOrderdetailId() {
+		return orderdetailId;
+	}
+
+	public void setOrderdetailId(Long orderdetailId) {
+		this.orderdetailId = orderdetailId;
+	}
+
+	public Product getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Product productId) {
+		this.productId = productId;
+	}
+
+	public Long getProductQty() {
+		return productQty;
+	}
+
+	public void setProductQty(Long productQty) {
+		this.productQty = productQty;
+	}
+
+	public Long getProductAmount() {
+		return productAmount;
+	}
+
+	public void setProductAmount(Long productAmount) {
+		this.productAmount = productAmount;
+	}
+
+	public Long getProductGrossamount() {
+		return productGrossamount;
+	}
+
+	public void setProductGrossamount(Long productGrossamount) {
+		this.productGrossamount = productGrossamount;
+	}
+
+	public Long getProductDiscount() {
+		return productDiscount;
+	}
+
+	public void setProductDiscount(Long productDiscount) {
+		this.productDiscount = productDiscount;
+	}
+
+	public Long getProductNetamount() {
+		return productNetamount;
+	}
+
+	public void setProductNetamount(Long productNetamount) {
+		this.productNetamount = productNetamount;
+	}
+
+	public List<Order> getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(List<Order> orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+	
+
 	
 	
 	

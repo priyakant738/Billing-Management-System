@@ -10,107 +10,118 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Retailers")
+@Table(name = "retailers", uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"shop_name", "first_Name", "last_Name"})
+	})
 public class Retailer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long retailer_id;
+	@Column(name ="retailer_id")
+	private Long retailerId;
 	
 	@Column(name ="shop_name")
-	private String shop_name;
+	private String shopName;
 	
-	@Column(name ="first_name")
-	private String first_name;
+	@Column(name ="first_Name")
+	private String firstName;
 	
-	@Column(name ="last_name")
-	private String last_name; 
+	@Column(name ="last_Name")
+	private String lastName; 
 	
-	@Column(name ="retailer_arddress")
-	private String retailer_address;
+	@Column(name ="retailer_Address")
+	private String retailerAddress;
 	
-	@Column(name ="retailer_pinCode")
-	private Long retailer_pincode;
+	@Column(name ="retailer_PinCode")
+	private Long retailerPincode;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private State state_id;
+	@OneToOne
+	@JoinColumn(name="state_id")
+	private State stateId;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private City city_id;
+	@OneToOne
+	@JoinColumn(name="city_id")
+	private City cityId;
 
-	public Long getRetailer_id() {
-		return retailer_id;
+	
+	public Long getRetailerId() {
+		return retailerId;
 	}
 
-	public void setRetailer_id(Long retailer_id) {
-		this.retailer_id = retailer_id;
+	public void setRetailerId(Long retailerId) {
+		this.retailerId = retailerId;
 	}
 
-	public String getShop_name() {
-		return shop_name;
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setShop_name(String shop_name) {
-		this.shop_name = shop_name;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getRetailer_address() {
-		return retailer_address;
+	public String getRetailerAddress() {
+		return retailerAddress;
 	}
 
-	public void setRetailer_address(String retailer_address) {
-		this.retailer_address = retailer_address;
+	public void setRetailerAddress(String retailerAddress) {
+		this.retailerAddress = retailerAddress;
 	}
 
-	public Long getRetailer_pincode() {
-		return retailer_pincode;
+	public Long getRetailerPincode() {
+		return retailerPincode;
 	}
 
-	public void setRetailer_pincode(Long retailer_pincode) {
-		this.retailer_pincode = retailer_pincode;
-	}
-
-	public State getState_id() {
-		return state_id;
-	}
-
-	public void setState_id(State state_id) {
-		this.state_id = state_id;
-	}
-
-	public City getCity_id() {
-		return city_id;
-	}
-
-	public void setCity_id(City city_id) {
-		this.city_id = city_id;
+	public void setRetailerPincode(Long retailerPincode) {
+		this.retailerPincode = retailerPincode;
 	}
 
 	
+
+	public State getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(State stateId) {
+		this.stateId = stateId;
+	}
+
+	public City getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(City cityId) {
+		this.cityId = cityId;
+	}
+
 	
+
 	
+
 	
 	
 

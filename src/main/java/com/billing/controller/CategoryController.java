@@ -27,7 +27,7 @@ public class CategoryController {
 	    
 	  //get all Category handler
 
-		@GetMapping("/category")
+		@GetMapping("/category/getAllcategory")
 		public ResponseEntity<List<Category>> getCategory()
 		{
 			List<Category>list = categoryService.getAllCategory();
@@ -40,7 +40,7 @@ public class CategoryController {
 		}
 		
 		//get single category  handler
-		@GetMapping("/category/{id}")
+		@GetMapping("/category/getByid/{id}")
 		public ResponseEntity<Category> getCategory(@PathVariable("id")Long id)
 		{
 			Category category = categoryService.getCategoryByid(id);
@@ -54,7 +54,7 @@ public class CategoryController {
 	
 		    //new Category handler
 		
-				@PostMapping("/category")
+				@PostMapping("/category/addcategory")
 				public ResponseEntity<Category> addCategory(@RequestBody Category category)
 				{
 					Category c = null;
@@ -76,7 +76,7 @@ public class CategoryController {
 				
 				//delete Category handler
 				
-				@DeleteMapping("/category/{id}")
+				@DeleteMapping("/category/deleteByid/{id}")
 				public ResponseEntity<Category> deleteCategory(@PathVariable("id")Long id)
 				{
 					try
@@ -93,8 +93,8 @@ public class CategoryController {
 								
 				
 				//update category handler
-				@PutMapping("/category/{id}")
-				public ResponseEntity<Category> updateCategory(@RequestBody Category category,@PathVariable("city_id") Long id)
+				@PutMapping("/category/updateByid/{id}")
+				public ResponseEntity<Category> updateCategory(@RequestBody Category category,@PathVariable("id") Long id)
 				{
 				  try {
 					  Category List=((CategoryService) this.categoryService).updateCategory(category, id);
@@ -108,6 +108,18 @@ public class CategoryController {
 				  }
 				 
 				  
+				}
+				
+				@GetMapping("/category/agencycategory")
+				public ResponseEntity<List<Category>> fetchByagency()
+				{
+					List<Category>list = categoryService.getAllCategory();
+					if(list.size()<= 0)
+					{
+						return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+					}
+					
+					return ResponseEntity.of(Optional.of(list));
 				}
 	
 

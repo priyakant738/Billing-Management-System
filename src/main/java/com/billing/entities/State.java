@@ -1,65 +1,64 @@
 package com.billing.entities;
 
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
-@Table(name = "State")
+@Table(name = "State",
+          uniqueConstraints={
+	    @UniqueConstraint(columnNames = {"state_Code", "state_Name"})
+	}) 
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+
 public class State extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long state_id;
+	@Column(name = "state_id")
+	private Long stateId;
 	
-	@Column(name ="state_code")
-	private String state_code;
+	@Column(name ="state_Code")
+	private String stateCode;
 	
-	@Column(name ="state_name")
-	private String state_name;
+	@Column(name ="state_Name")
+	private String stateName;
+
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<City> city;
-
-	public Set<City> getCity() {
-		return city;
+	public Long getStateId() {
+		return stateId;
 	}
 
-	public void setCity(Set<City> city) {
-		this.city = city;
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
 	}
 
-	public Long getState_id() {
-		return state_id;
+	public String getStateCode() {
+		return stateCode; 
 	}
 
-	public void setState_id(Long state_id) {
-		this.state_id = state_id;
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
 	}
 
-	public String getState_code() {
-		return state_code;
+	public String getStateName() {
+		return stateName;
 	}
 
-	public void setState_code(String state_code) {
-		this.state_code = state_code;
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
 	}
 
-	public String getState_name() {
-		return state_name;
-	}
-
-	public void setState_name(String state_name) {
-		this.state_name = state_name;
-	}
-
+	
 	
 	
 

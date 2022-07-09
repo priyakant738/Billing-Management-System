@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.billing.Services.AgencyDealerService;
 import com.billing.entities.AgencyDealer;
 import com.billing.entities.State;
+import com.billing.modelDTO.AgencyDealerModel;
 
 
 
@@ -28,10 +29,10 @@ public class AgencyDealerController {
 	
 	//get all AgencyDealer handler
 	
-		@GetMapping("/agencydealer")
-		public ResponseEntity<List<AgencyDealer>> getAgencyDealer()
+		@GetMapping("/agencydealer/getAllagencydealer")
+		public ResponseEntity<List<AgencyDealerModel>> getAgencyDealer()
 		{
-			List<AgencyDealer>list = agencyDealerSevice.getAllAgencyDealer();
+			List<AgencyDealerModel>list = agencyDealerSevice.getAllAgencyDealer();
 			if(list.size()<= 0)
 			{
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -42,7 +43,7 @@ public class AgencyDealerController {
 		
 		//get single AgencyDealer handler
 		
-		@GetMapping("/agencydealer/{id}")
+		@GetMapping("/agencydealer/getByid/{id}")
 		public ResponseEntity<AgencyDealer> getAgencyDealer(@PathVariable("id")Long id)
 		{
 			AgencyDealer agencyDealer = agencyDealerSevice.getAgencyDealerByid(id);
@@ -77,7 +78,7 @@ public class AgencyDealerController {
 		
 		//delete AgencyDealer handler
 		
-		@DeleteMapping("/agencydealer/{id}")
+		@DeleteMapping("/agencydealer/deleteByid/{id}")
 		public ResponseEntity<AgencyDealer> deleteState(@PathVariable("id")Long id)
 		{
 			try
@@ -93,7 +94,7 @@ public class AgencyDealerController {
 		}
 		
 		//update state handler
-		@PutMapping("/agencydealer/{id}")
+		@PutMapping("/agencydealer/updateByid/{id}")
 		public ResponseEntity<AgencyDealer> updateAgencyDealer(@RequestBody AgencyDealer agencyDealer,@PathVariable("id") Long id)
 		{
 		   

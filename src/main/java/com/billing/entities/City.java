@@ -1,20 +1,18 @@
 package com.billing.entities;
 
 
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "City")
@@ -22,63 +20,58 @@ public class City extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long city_id;
+	@Column(name = "city_id")
+	private Long cityId;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="state_id")
-	private State state_id;
+	private State stateId;
 	
 	@Column(name ="city_code")
-	private Long city_code;
+	private Long cityCode;
 	
 	@Column(name ="city_name")
-	private String city_name;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Area> area;
+	private String cityName;
 
-	public Long getCity_id() {
-		return city_id;
+	public Long getCityId() {
+		return cityId;
 	}
 
-	public void setCity_id(Long city_id) {
-		this.city_id = city_id;
+	public void setCityid(Long cityid) {
+		this.cityId = cityid;
 	}
 
-	public State getState_id() {
-		return state_id;
+
+	public State getStateId() {
+		return stateId;
 	}
 
-	public void setState_id(State state_id) {
-		this.state_id = state_id;
+	public void setStateId(State stateId) {
+		this.stateId = stateId;
 	}
 
-	public Long getCity_code() {
-		return city_code;
+	public Long getCityCode() {
+		return cityCode;
 	}
 
-	public void setCity_code(Long city_code) {
-		this.city_code = city_code;
+	public void setCityCode(Long cityCode) {
+		this.cityCode = cityCode;
 	}
 
-	public String getCity_name() {
-		return city_name;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setCity_name(String city_name) {
-		this.city_name = city_name;
-	}
-
-	public Set<Area> getArea() {
-		return area;
-	}
-
-	public void setArea(Set<Area> area) {
-		this.area = area;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	
+
 	
+
+
+
 	
 
 }

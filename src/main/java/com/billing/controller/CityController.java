@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.billing.Services.CityService;
 import com.billing.entities.City;
+import com.billing.modelDTO.CityModel;
+
 
 @Controller
 public class CityController {
@@ -27,10 +30,10 @@ public class CityController {
 	
 	//get all city handler
 	
-	@GetMapping("/city")
-	public ResponseEntity<List<City>> getCity()
+	@GetMapping("/city/getAllcity")
+	public ResponseEntity<List<CityModel>> getCity()
 	{
-		List<City>list = cityService.getAllCity();
+		List<CityModel>list = cityService.getAllCity();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,7 +44,7 @@ public class CityController {
 	
 	
 	//get single city handler
-	@GetMapping("/city/{id}")
+	@GetMapping("/city/getBycity/{id}")
 	public ResponseEntity<City> getCity(@PathVariable("id")Long id)
 	{
 		City city = cityService.getCityByid(id);
@@ -55,16 +58,17 @@ public class CityController {
 	
 	//new city handler
 	
+	
 	@PostMapping("/city/addcity")
-	public ResponseEntity<City> addCity(@RequestBody Map<String,Object> mp)
+	public ResponseEntity<City> addCity(@RequestBody City city)
 	{
 		City c = null;
 		
 		try
 		{
-			c = this.cityService.addCity(mp);
-			System.out.println(mp);
-			return ResponseEntity.status(HttpStatus.CREATED).body(c);
+			c = this.cityService.addCity(city);
+			System.out.println(city);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 			
 		}
 		 catch(Exception e)
@@ -78,7 +82,7 @@ public class CityController {
 	
 	//delete city handler
 	
-	@DeleteMapping("/city/{id}")
+	@DeleteMapping("/city/deleteByid/{id}")
 	public ResponseEntity<Object> deleteCity(@PathVariable("id")Long id)
 	{
 		try
@@ -94,8 +98,8 @@ public class CityController {
 	}
 	
 	//update city handler
-	@PutMapping("/city/{id}")
-	public ResponseEntity<City> updateCity(@RequestBody City city,@PathVariable("city_id") Long id)
+	@PutMapping("/city/updateByid/{id}")
+	public ResponseEntity<City> updateCity(@RequestBody City city,@PathVariable("id") Long id)
 	{
 	  try {
 		  City List=this.cityService.updateCity(city, id);

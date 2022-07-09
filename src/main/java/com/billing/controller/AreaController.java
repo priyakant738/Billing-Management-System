@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.billing.Services.AreaService;
 import com.billing.entities.Area;
+import com.billing.modelDTO.AreaModel;
 
 @Controller
 public class AreaController {
@@ -26,10 +27,10 @@ public class AreaController {
 	
 	//get All Area handler
 	
-	@GetMapping("/area")
-	public ResponseEntity<List<Area>> getArea()
+	@GetMapping("/area/getAllarea")
+	public ResponseEntity<List<AreaModel>> getArea()
 	{
-		List<Area>list = areaService.getAllArea();
+		List<AreaModel>list = areaService.getAllArea();
 		if(list.size()<= 0)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,7 +42,7 @@ public class AreaController {
 
 	//get single Area handler
 	
-		@GetMapping("/area/{id}")
+		@GetMapping("/area/getByid/{id}")
 		public ResponseEntity<Area> getArea(@PathVariable("id")Long id)
 		{
 			Area area = areaService.getAreaByid(id);
@@ -55,7 +56,7 @@ public class AreaController {
 		//new Area handler
 		
 		@PostMapping("/area/addarea")
-		public ResponseEntity<Area> addArea(@RequestBody Map<String, Object> area)
+		public ResponseEntity<Area> addArea(@RequestBody Area area)
 		{
 			Area a = null;
 			
@@ -76,7 +77,7 @@ public class AreaController {
 		
 		//delete Area handler
 		
-		@DeleteMapping("/area/{id}")
+		@DeleteMapping("/area/deleteByid/{id}")
 		public ResponseEntity<Object> deleteArea(@PathVariable("id")Long id)
 		{
 			try
@@ -92,7 +93,7 @@ public class AreaController {
 		}
 		
 		//update Area handler
-		@PutMapping("/area/{id}")
+		@PutMapping("/area/updateByid/{id}")
 		public ResponseEntity<Area> updateArea(@RequestBody Area area,@PathVariable("id") Long id)
 		{
 		   try
@@ -107,5 +108,9 @@ public class AreaController {
 		   }
 		   
 		}
+		
+		
+		
+		
 
 }

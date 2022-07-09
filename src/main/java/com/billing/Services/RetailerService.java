@@ -1,5 +1,6 @@
 package com.billing.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.billing.Repository.RetailerRepository;
 import com.billing.entities.Retailer;
+import com.billing.modelDTO.RetailerModel;
 
 @Service
 public class RetailerService {
@@ -14,10 +16,22 @@ public class RetailerService {
 	@Autowired
 	private RetailerRepository retailerRepository;
 	
-	public List<Retailer> getAllRetailer()
+	//get all retailer
+	
+	public List<RetailerModel> getAllRetailer()
 	{
 		List<Retailer> list=(List<Retailer>)this.retailerRepository.findAll();
-		return list;
+		
+		List<RetailerModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+			list1.add(new RetailerModel(e.getShopName(),e.getFirstName(),
+					e.getLastName(),e.getRetailerAddress(),
+					e.getRetailerPincode(),e.getStateId().getStateName(),
+					e.getCityId().getCityName()));
+		});
+		
+		return list1;
 		
 	}
 	
@@ -29,7 +43,7 @@ public class RetailerService {
 		Retailer retailer=null;
 		try 
 		{
-			retailer = this.retailerRepository.find(id);
+			retailer = this.retailerRepository.getById(id);
 			 
 			
 		}
@@ -64,11 +78,13 @@ public class RetailerService {
 				
 				Retailer list= retailerRepository.getById(id);
 				
-				list.getShop_name();
-				list.setFirst_name(retailer.getFirst_name());
-				list.setLast_name(retailer.getLast_name());
-				list.setRetailer_address(retailer.getRetailer_address());
-				list.setRetailer_pincode(retailer.getRetailer_pincode());
+				list.setShopName(retailer.getShopName());
+				list.setFirstName(retailer.getFirstName());
+				list.setLastName(retailer.getLastName());
+				list.setRetailerAddress(retailer.getRetailerAddress());
+				list.setRetailerPincode(retailer.getRetailerPincode());
+				list.setCityId(retailer.getCityId());
+				list.setStateId(retailer.getStateId());
 				
 				retailerRepository.save(list);
 				

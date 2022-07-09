@@ -15,90 +15,112 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "AgencyDealer")
+@Table(name = "agency_dealer")
 public class AgencyDealer extends BaseClass<String>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long agencydealer_id;
+	@Column(name="agencydealer_id")
+	private Long agencydealerId;
 	  
    @OneToOne
    @JoinColumn(name = "agency_id")
-   private Agency agency_id;
+   private Agency agencyId;
    
    @OneToOne
    @JoinColumn(name = "dealer_id")
-   private Dealer dealer_id;
+   private Dealer dealerId;
    
-   @OneToMany(cascade=CascadeType.ALL,targetEntity=AgencyDealer.class)
+   @OneToOne
    @JoinColumn(name = "cagegory_id")
-   private List<Category> category_id;
+   private Category categoryId;
  
-   @OneToMany(cascade=CascadeType.ALL,targetEntity=AgencyDealer.class)
+   @OneToOne
    @JoinColumn(name = "product_id")
-   private List<Product> product_id = new ArrayList<>();
+   private Product productId;
 	
 	
-	@Column(name ="product_grossamount")
-	private Long product_grossamount;
+	@Column(name ="product_Grossamount")
+	private Long productGrossamount;
 	 
-	@Column(name ="product_getamount")
-	private Long product_netamount;
+	@Column(name ="product_Netamount")
+	private Long productNetamount;
 	 
-	@Column(name ="product_discount")
-	private Long product_discount;
+	@Column(name ="product_Discount")
+	private Long productDiscount;
 	
 	@Column(name ="status")
 	private String status;
 
-	public Long getAgency_dealer_id() {
-		return agencydealer_id;
+
+	public Long getAgencydealerId() {
+		return agencydealerId;
 	}
 
-	public void setAgency_dealer_id(Long agency_dealer_id) {
-		this.agencydealer_id = agency_dealer_id;
+	public void setAgencydealerId(Long agencydealerId) {
+		this.agencydealerId = agencydealerId;
 	}
+
+
 
 	
 
-	public List<Category> getCategory_id() {
-		return category_id;
+	
+
+	public Agency getAgencyId() {
+		return agencyId;
 	}
 
-	public void setCategory_id(List<Category> category_id) {
-		this.category_id = category_id;
+	public void setAgencyId(Agency agencyId) {
+		this.agencyId = agencyId;
 	}
 
-	public List<Product> getProduct_id() {
-		return product_id;
+	public Dealer getDealerId() {
+		return dealerId;
 	}
 
-	public void setProduct_id(List<Product> product_id) {
-		this.product_id = product_id;
+	public void setDealerId(Dealer dealerId) {
+		this.dealerId = dealerId;
 	}
 
-	public Long getProduct_grossamount() {
-		return product_grossamount;
+	public Category getCategoryId() {
+		return categoryId;
 	}
 
-	public void setProduct_grossamount(Long product_grossamount) {
-		this.product_grossamount = product_grossamount;
+	public void setCategoryId(Category categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public Long getProduct_netamount() {
-		return product_netamount;
+	public Product getProductId() {
+		return productId;
 	}
 
-	public void setProduct_netamount(Long product_netamount) {
-		this.product_netamount = product_netamount;
+	public void setProductId(Product productId) {
+		this.productId = productId;
 	}
 
-	public Long getProduct_discount() {
-		return product_discount;
+	public Long getProductGrossamount() {
+		return productGrossamount;
 	}
 
-	public void setProduct_discount(Long product_discount) {
-		this.product_discount = product_discount;
+	public void setProductGrossamount(Long productGrossamount) {
+		this.productGrossamount = productGrossamount;
+	}
+
+	public Long getProductNetamount() {
+		return productNetamount;
+	}
+
+	public void setProductNetamount(Long productNetamount) {
+		this.productNetamount = productNetamount;
+	}
+
+	public Long getProductDiscount() {
+		return productDiscount;
+	}
+
+	public void setProductDiscount(Long productDiscount) {
+		this.productDiscount = productDiscount;
 	}
 
 	public String getStatus() {
@@ -109,7 +131,6 @@ public class AgencyDealer extends BaseClass<String>{
 		this.status = status;
 	}
 
-	
 	
 	
 	

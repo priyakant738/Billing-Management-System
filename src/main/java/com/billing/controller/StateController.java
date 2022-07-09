@@ -25,7 +25,7 @@ public class StateController {
 	
 	//get all state handler
 	
-	@GetMapping("/state")
+	@GetMapping("/state/getAllstate")
 	public ResponseEntity<List<State>> getState()
 	{
 		List<State>list = stateService.getAllState();
@@ -39,7 +39,7 @@ public class StateController {
 	
 	//get single state handler
 	
-	@GetMapping("/state/{id}")
+	@GetMapping("/state/getByid/{id}")
 	public ResponseEntity<State> getState(@PathVariable("id")Long id)
 	{
 		State state = stateService.getStateByid(id);
@@ -75,7 +75,7 @@ public class StateController {
 	
 	//delete State handler
 	
-	@DeleteMapping("/state/{id}")
+	@DeleteMapping("/state/delete/{id}")
 	public ResponseEntity<State> deleteState(@PathVariable("id")Long id)
 	{
 		try
@@ -91,7 +91,7 @@ public class StateController {
 	}
 	
 	//update state handler
-	@PutMapping("/state/{id}")
+	@PutMapping("/state/updateByid/{id}")
 	public ResponseEntity<State> updateState(@RequestBody State state,@PathVariable("id") Long id)
 	{
 	   

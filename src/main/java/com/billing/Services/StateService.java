@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.billing.Exception.DataException;
 import com.billing.Repository.StateRepository;
 import com.billing.entities.State;
 
@@ -22,10 +23,12 @@ public class StateService {
 	{
 		State result=stateRepository.save(s);
 		return result;
+		
+		
 				
 	}
 			
-
+  //get all state
 	
 	public List<State> getAllState()
 	{
@@ -42,24 +45,27 @@ public class StateService {
 			State state=null;
 			try 
 			{
-				 state = this.stateRepository.find(id);
+				 state = this.stateRepository.getById(id);
 				 
-				
+				return state;
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
-			return state;
+			return null;
 			
 		}
+		
 		
 		
 		
 		 //delete State
 		public void deleteState(Long sid)
 		{
-			stateRepository.deleteById(sid);
+			{
+				stateRepository.deleteById(sid);
+			}
 		}
 		
 		
@@ -70,8 +76,8 @@ public class StateService {
 			
 			State list= stateRepository.getById(id);
 			
-			list.setState_code(state.getState_code());
-			list.setState_name(state.getState_name());
+			list.setStateCode(state.getStateCode());
+			list.setStateName(state.getStateName());
 			
 			stateRepository.save(list);
 			

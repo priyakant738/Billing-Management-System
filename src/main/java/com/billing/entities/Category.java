@@ -13,69 +13,68 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Category")
+//    , uniqueConstraints={
+//	    @UniqueConstraint(columnNames = {"category_Code", "category_Name"})
+//	})
 public class Category extends BaseClass<String> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long category_id;
+	@Column(name = "category_id")
+	private Long categoryId;
 
 
 	
 	@ManyToOne
 	@JoinColumn(name = "agency_id")
-	private Agency agency_id;
+	private Agency agencyId;
 	
 	
-	@Column(name ="category_code")
-	private String category_code;
+	@Column(name ="category_Code")
+	private String categoryCode;
 	
-	@Column(name ="category_name")
-	private String category_name;
+	@Column(name ="category_Name")
+	private String categoryName;
 	
 	@Column(name ="status")
 	private String status;
+
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private Set<Product> product;
+	
 
-//	@ManyToOne
-//	private AgencyDealer AgencyDealer;
-//	
-//	@ManyToOne
-//	private DealerRetailer DealerRetailer;
-
-	public Long getCategory_id() {
-		return category_id;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory_id(Long category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public Agency getAgency_id() {
-		return agency_id;
+	public Agency getAgencyId() {
+		return agencyId;
 	}
 
-	public void setAgency_id(Agency agency_id) {
-		this.agency_id = agency_id;
+	public void setAgencyId(Agency agencyId) {
+		this.agencyId = agencyId;
 	}
 
-	public String getCategory_code() {
-		return category_code;
+	public String getCategoryCode() {
+		return categoryCode;
 	}
 
-	public void setCategory_code(String category_code) {
-		this.category_code = category_code;
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getStatus() {
@@ -86,33 +85,7 @@ public class Category extends BaseClass<String> {
 		this.status = status;
 	}
 
-	public Set<Product> getProduct() {
-		return product;
-	}
-
-	public void setProduct(Set<Product> product) {
-		this.product = product;
-	}
-
-//	public AgencyDealer getAgencyDealer() {
-//		return AgencyDealer;
-//	}
-//
-//	public void setAgencyDealer(AgencyDealer agencyDealer) {
-//		AgencyDealer = agencyDealer;
-//	}
-//
-//	public DealerRetailer getDealerRetailer() {
-//		return DealerRetailer;
-//	}
-//
-//	public void setDealerRetailer(DealerRetailer dealerRetailer) {
-//		DealerRetailer = dealerRetailer;
-//	}
-
 	
 	
 	
-	
-
 }

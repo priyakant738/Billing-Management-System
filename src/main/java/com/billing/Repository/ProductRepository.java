@@ -8,7 +8,7 @@ import com.billing.entities.Product;
 
 public interface ProductRepository extends JpaRepository <Product, Long>{
 	
-	@Query("select p from Product p where p.product_id = :id")
-	public Product find(@Param("id") Long id);
+//	@Query("select p from Product p where p.productid = :id")
+//	public Product find(@Param("id") Long id);
 
 }

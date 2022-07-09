@@ -10,6 +10,7 @@ import com.billing.Repository.CityRepository;
 import com.billing.Repository.StateRepository;
 import com.billing.entities.City;
 import com.billing.entities.State;
+import com.billing.modelDTO.CityModel;
 
 
 @Service
@@ -17,46 +18,32 @@ public class CityService {
 	
 	@Autowired
 	private CityRepository cityRepository;
-
-	@Autowired
-	private StateRepository stateRepository;
 	
 	
 	//Adding the city
 	
-	public City addCity(Map<String,Object> mp)
+	public City addCity(City c)
 	{
-		City result=null;
-		try {
-			Long cityCode =  Long.parseLong((String) mp.get("city_code"));
-			String cityName = (String) mp.get("city_name");
-			
-			Long stateId =  Long.parseLong((String) mp.get("state_id"));
-			Optional<State> state = stateRepository.findById(stateId);
-			
-			City city = new City();
-			
-			city.setCity_code(cityCode);
-			city.setCity_name(cityName);
-			city.setState_id(state.get());
-			
-			 result=cityRepository.save(city);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}
-	   
+		City result=cityRepository.save(c);
 		return result;
 				
 	}
 			
 
+	//get all city
 	
-	public List<City> getAllCity()
+	public List<CityModel> getAllCity()
 	{
 		List<City> list=(List<City>)this.cityRepository.findAll();
-		return list;
+		
+		List<CityModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+		list1.add(new CityModel(e.getCityCode(),e.getCityName(),
+				e.getStateId().getStateName()));
+		});
+		
+		return list1;
 		
 	}
 	
@@ -68,7 +55,7 @@ public class CityService {
 			City city=null;
 			try 
 			{
-				 city = this.cityRepository.find(id);
+				 city = this.cityRepository.getById(id);
 				 
 				
 			}
@@ -94,9 +81,9 @@ public class CityService {
 				{
 					
 					City list= cityRepository.getById(id);
-					list.setState_id(city.getState_id());
-					list.setCity_code(city.getCity_code());
-					list.setCity_name(city.getCity_name());
+					list.setStateId(city.getStateId());
+					list.setCityCode(city.getCityCode());
+					list.setCityName(city.getCityName());
 										
 					cityRepository.save(list);
 					

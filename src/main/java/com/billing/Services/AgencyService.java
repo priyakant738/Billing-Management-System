@@ -1,5 +1,6 @@
 package com.billing.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import com.billing.Repository.StateRepository;
 import com.billing.entities.Agency;
 import com.billing.entities.City;
 import com.billing.entities.State;
+import com.billing.modelDTO.AgencyModel;
 
 @Service
 public class AgencyService {
@@ -21,19 +23,23 @@ public class AgencyService {
 	@Autowired
 	private AgencyRepository agencyRepository;
 	
-	@Autowired
-	private StateRepository stateRepository;
-	
-	@Autowired
-	private CityRepository cityRepository;
 
-	private String agency_name;
 	
 	
-	public List<Agency>getAllAgency()
+	public List<AgencyModel>getAllAgency()
 	{
 		List<Agency> list=(List<Agency>)this.agencyRepository.findAll();
-		return list;
+		
+		List<AgencyModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+			list1.add(new AgencyModel(e.getAgencyName(),e.getOwnerFirstName(),e.getOwnerLastname(),
+					e.getAgencyAddress(),e.getAgencyPincode(),e.getPancard(),e.getGstinNumber(),
+					e.getCityId().getCityName(),e.getStateId().getStateName()));
+		});
+		
+		
+		return list1;
 	}
 	
 	
@@ -42,50 +48,12 @@ public class AgencyService {
 	
 	//Adding the Agency
 	
-		public Agency addAgency(Map<String,Object> mp)
-		{
-			Agency result=null;
-			try {
+	public Agency addAgency(Agency a)
+	{
+		Agency result=agencyRepository.save(a);
+		return result;
 				
-				String agencyName = (String) mp.get("agency_name");
-				String owner_first_name = (String) mp.get("owner_first_name");
-				String owner_last_name = (String) mp.get("owner_last_name");
-                String agency_address = (String) mp.get("agency_address");
-                String agency_pincode = (String) mp.get("agency_pincode");
-                String pancard = (String) mp.get("pancard");
-				String gstin_number = (String) mp.get("gstin_number");
-				
-				
-				
-				Long stateId =  Long.parseLong((String) mp.get("state_id"));
-				Optional<State> state = stateRepository.findById(stateId);
-				
-				Long cityId =  Long.parseLong((String) mp.get("city_id"));
-				Optional<City> city = cityRepository.findById(cityId);
-				
-				Agency agency = new Agency();
-				agency.setAgency_name(agency_name);
-				agency.setOwner_first_name(owner_first_name);
-				agency.setOwner_last_name(owner_last_name);
-				agency.setAgency_address(agency_address);
-				agency.setAgency_pincode(agency_pincode);
-				agency.setPancard(pancard);
-				agency.setGstin_number(gstin_number);
-				
-				agency.setState_id(state.get());
-				agency.setCity_id(city.get());
-				
-							
-				 result=agencyRepository.save(agency);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-				System.out.println(e);
-			}
-		   
-			return result;
-					
-		}
+	}
 	
 	
 	
@@ -98,7 +66,7 @@ public class AgencyService {
 		Agency agency=null;
 		try 
 		{
-			 agency = this.agencyRepository.find(id);
+			 agency = this.agencyRepository.getById(id);
 			 
 			
 		}
@@ -120,19 +88,23 @@ public class AgencyService {
 	
 	//update the Agency
 	
-	public void updateAgency(Agency agency, Long id)
+	public Agency updateAgency(Agency agency, Long id)
 	{
 		Agency list = agencyRepository.getById(id);
 		
-		list.setAgency_name(agency.getAgency_name());
-		list.setOwner_first_name(agency.getOwner_first_name());
-		list.setOwner_last_name(agency.getOwner_last_name());
-		list.setAgency_address(agency.getAgency_address());
-		list.setAgency_pincode(agency.getAgency_pincode());
-		list.setCity_id(agency.getCity_id());
-		list.setState_id(agency.getState_id());
+		list.setAgencyName(agency.getAgencyName());
+		list.setOwnerFirstName(agency.getOwnerFirstName());
+		list.setOwnerLastname(agency.getOwnerLastname());
+		list.setAgencyAddress(agency.getAgencyAddress());
+		list.setAgencyPincode(agency.getAgencyPincode());
+		list.setCityId(agency.getCityId());
+		list.setStateId(agency.getStateId());
 		list.setPancard(agency.getPancard());
-		list.setGstin_number(agency.getGstin_number());
+		list.setGstinNumber(agency.getGstinNumber());
+		
+		 agencyRepository.save(list);
+		 
+		 return list;
 	}
 
 }

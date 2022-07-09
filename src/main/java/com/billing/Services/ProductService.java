@@ -1,5 +1,6 @@
 package com.billing.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.billing.Repository.ProductRepository;
 import com.billing.Repository.StateRepository;
 import com.billing.entities.Product;
 import com.billing.entities.State;
+import com.billing.modelDTO.ProductModel;
 
 
 @Service
@@ -18,10 +20,20 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	public List<Product> getAllProduct()
+	
+	public List<ProductModel> getAllProduct()
 	{
 		List<Product> list=(List<Product>)this.productRepository.findAll();
-		return list;
+		
+		List<ProductModel> list1 = new ArrayList<>();
+		
+		list.forEach(e->{
+			list1.add(new ProductModel(e.getProductName(),e.getProductCode(),
+					e.getProductPrice(),e.getProductDesc(),e.getProductStatus(),
+					e.getCategoryId().getCategoryName(),
+					e.getAgencyId().getAgencyName()));
+});
+		return list1;
 		
 	}
 	
@@ -33,7 +45,7 @@ public class ProductService {
 			Product product=null;
 			try 
 			{
-				 product = this.productRepository.find(id);
+				 product = this.productRepository.getById(id);
 				 
 				
 			}
@@ -70,13 +82,13 @@ public class ProductService {
 			
 			Product list= productRepository.getById(id);
 			
-			list.setCategory_id(product.getCategory_id());
-			list.setAgency_id(product.getAgency_id());
-			list.setProduct_name(product.getProduct_name());
-			list.setProduct_code(product.getProduct_code());
-			list.setProduct_price(product.getProduct_price());
-			list.setProduct_desc(product.getProduct_desc());
-			list.setProduct_status(product.getProduct_status());
+			list.setCategoryId(product.getCategoryId());
+			list.setAgencyId(product.getAgencyId());
+			list.setProductName(product.getProductName());
+			list.setProduct_Code(product.getProduct_Code());
+			list.setProductPrice(product.getProductPrice());
+			list.setProductDesc(product.getProductDesc());
+			list.setProductStatus(product.getProductStatus());
 			
 			productRepository.save(list);
 			

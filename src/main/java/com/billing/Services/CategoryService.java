@@ -1,11 +1,15 @@
 package com.billing.Services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.billing.Repository.CategoryRepository;
+import com.billing.entities.Agency;
 import com.billing.entities.Category;
 
 
@@ -31,7 +35,7 @@ public class CategoryService {
 			Category category=null;
 			try 
 			{
-				category = this.categoryRepository.find(id);
+				category = this.categoryRepository.getById(id);
 				 
 				
 			}
@@ -48,9 +52,16 @@ public class CategoryService {
 		
 		public Category addCategory(Category c)
 		{
-			Category result=categoryRepository.save(c);
-			return result;
-			
+			try {
+				
+				Category result=categoryRepository.save(c);
+				return result;
+			}
+			catch(Exception e) {
+				System.out.println(e);
+				
+			}
+			return null;
 		}
 		
 
@@ -68,17 +79,39 @@ public class CategoryService {
 			
 			Category list= categoryRepository.getById(id);
 			
-			list.setAgency_id(category.getAgency_id());
+			list.setAgencyId(category.getAgencyId());
 			
-			list.setCategory_code(category.getCategory_code());
+			list.setCategoryCode(category.getCategoryCode());
 			
-			list.setCategory_name(category.getCategory_name());
-			
+			list.setCategoryName(category.getCategoryName());
+		
 			list.setStatus(category.getStatus());
 			
 			categoryRepository.save(list);
 			
 			return list;
 		}
+		
+		
+		//
+		
+//   public Map<String, Object> fetchByagency()
+//   {
+//	   List<Category> categoryList = categoryRepository.fetchByagency();
+//	   
+//	  Map<String, Object> category =new HashMap<>();
+//	   
+//	 for (Category e : categoryList) {
+//		 
+//		 category.put("agencyName", e.getAgencyId().getAgencyName());
+//		 category.put("categoryName", e.getCategoryName());
+//	 }
+//		   
+//		   
+//		   
+//	   
+//	return category;
+//	   
+//   }
 
 }
